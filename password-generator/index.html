@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Free Password Generator - Create Strong & Secure Passwords | Multi Tools</title>
+<meta name="description" content="Generate strong, secure, and random passwords instantly. Customize password length, symbols, uppercase, lowercase, and numbers. Free online Password Generator by Multi Tools." />
+<meta name="keywords" content="Password Generator, Strong Password Generator, Random Password Generator, Secure Password Generator, Free Password Generator, Online Password Generator, Create Strong Password, Generate Password, Password Creator, Random Password, Secure Password Tool" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="./" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Free Password Generator - Create Strong & Secure Passwords | Multi Tools" />
+<meta property="og:description" content="Generate strong, secure, and random passwords instantly. Customize length, symbols, and character types." />
+<meta property="og:url" content="./" />
+<meta property="og:site_name" content="Multi Tools" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Free Password Generator | Multi Tools" />
+<meta name="twitter:description" content="Create strong, random, secure passwords instantly. 100% browser-based." />
+<link rel="stylesheet" href="style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Password Generator",
+  "url": "./",
+  "applicationCategory": "SecurityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Free online password generator that creates strong, random, and secure passwords in your browser."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "../" },
+    { "@type": "ListItem", "position": 2, "name": "Password Generator", "item": "./" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is a strong password?","acceptedAnswer":{"@type":"Answer","text":"A strong password is long (at least 12–16 characters), uses a mix of uppercase, lowercase, numbers, and symbols, and avoids dictionary words or personal information."}},
+    {"@type":"Question","name":"How long should a password be?","acceptedAnswer":{"@type":"Answer","text":"For most accounts, 16 characters or more is recommended. For high-value accounts, use 20+ characters."}},
+    {"@type":"Question","name":"Should I use symbols?","acceptedAnswer":{"@type":"Answer","text":"Yes. Symbols dramatically increase entropy and make passwords far harder to brute-force."}},
+    {"@type":"Question","name":"Can hackers guess random passwords?","acceptedAnswer":{"@type":"Answer","text":"Truly random passwords of sufficient length are practically impossible to guess with current computing power."}},
+    {"@type":"Question","name":"Is this password generator safe?","acceptedAnswer":{"@type":"Answer","text":"Yes. All passwords are generated locally in your browser using the Web Crypto API. Nothing is sent to any server."}},
+    {"@type":"Question","name":"Are passwords stored?","acceptedAnswer":{"@type":"Answer","text":"Only your recent history is stored in your browser's local storage, and only on your device. You can clear it anytime."}},
+    {"@type":"Question","name":"Can I use generated passwords for banking?","acceptedAnswer":{"@type":"Answer","text":"Yes. Generated passwords are cryptographically secure and suitable for banking, email, and any sensitive account."}},
+    {"@type":"Question","name":"Why use a password manager?","acceptedAnswer":{"@type":"Answer","text":"A password manager lets you use unique, strong passwords for every account without needing to remember them."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a href="../" class="logo" aria-label="Multi Tools Home">
+      <span class="logo-mark" aria-hidden="true">M</span>
+      <span class="logo-text">Multi Tools</span>
+    </a>
+    <div class="tool-name" aria-hidden="true">Password Generator</div>
+    <a href="../" class="btn btn-ghost back-btn">← Back to Home</a>
+  </div>
+</header>
+<main id="main" class="container">
+  <section class="hero">
+    <h1>Password Generator</h1>
+    <p class="subtitle">Create strong, random, and secure passwords instantly. Customize password length and character types for maximum security.</p>
+  </section>
+  <section class="card glass" aria-label="Password generator">
+    <div class="password-display">
+      <input id="passwordOutput" type="text" readonly aria-label="Generated password" spellcheck="false" />
+      <button id="copyBtn" class="btn btn-icon" aria-label="Copy password">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      </button>
+      <button id="regenBtn" class="btn btn-icon" aria-label="Regenerate password">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+      </button>
+    </div>
+    <div class="strength-wrap" aria-live="polite">
+      <div class="strength-bar"><div id="strengthFill" class="strength-fill"></div></div>
+      <div class="strength-label"><span>Strength:</span> <strong id="strengthLabel">—</strong></div>
+    </div>
+    <div class="options">
+      <div class="option-row">
+        <label for="lengthRange">Password Length: <strong id="lengthValue">16</strong></label>
+        <input type="range" id="lengthRange" min="4" max="64" value="16" aria-label="Password length" />
+      </div>
+      <div class="checkbox-grid">
+        <label class="check"><input type="checkbox" id="optUpper" checked /> <span>Uppercase (A–Z)</span></label>
+        <label class="check"><input type="checkbox" id="optLower" checked /> <span>Lowercase (a–z)</span></label>
+        <label class="check"><input type="checkbox" id="optNumbers" checked /> <span>Numbers (0–9)</span></label>
+        <label class="check"><input type="checkbox" id="optSymbols" checked /> <span>Symbols (!@#…)</span></label>
+        <label class="check"><input type="checkbox" id="optExcludeSimilar" /> <span>Exclude Similar (i,l,1,L,o,0,O)</span></label>
+        <label class="check"><input type="checkbox" id="optExcludeAmbiguous" /> <span>Exclude Ambiguous ({}[]()/\'"`~,;:.<>)</span></label>
+        <label class="check"><input type="checkbox" id="optNoDup" /> <span>Avoid Duplicate Characters</span></label>
+        <label class="check"><input type="checkbox" id="optRequireAll" checked /> <span>Require Every Selected Type</span></label>
+      </div>
+    </div>
+    <div class="action-row">
+      <button id="generateBtn" class="btn btn-primary">Generate Password</button>
+      <button id="copyBtn2" class="btn btn-secondary">Copy Password</button>
+      <button id="resetBtn" class="btn btn-ghost">Reset</button>
+    </div>
+    <div class="info-grid" aria-label="Password information">
+      <div class="info-tile"><span>Characters</span><strong id="infoLength">0</strong></div>
+      <div class="info-tile"><span>Strength</span><strong id="infoStrength">—</strong></div>
+      <div class="info-tile"><span>Crack Time</span><strong id="infoCrack">—</strong></div>
+      <div class="info-tile"><span>Entropy</span><strong id="infoEntropy">0 bits</strong></div>
+    </div>
+  </section>
+  <aside class="notice" role="note">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <p><strong>Private &amp; Secure:</strong> Passwords are generated locally in your browser. Nothing is sent to any server.</p>
+  </aside>
+  <section class="card glass">
+    <div class="section-head">
+      <h2>Password History</h2>
+      <button id="clearHistoryBtn" class="btn btn-ghost btn-sm">Clear History</button>
+    </div>
+    <ul id="historyList" class="history-list" aria-live="polite"></ul>
+    <p id="historyEmpty" class="empty-state">No passwords generated yet.</p>
+  </section>
+  <section class="card">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>What is a strong password?</summary><p>A strong password is long (at least 12–16 characters), uses a mix of uppercase, lowercase, numbers and symbols, and avoids dictionary words or personal information.</p></details>
+      <details><summary>How long should a password be?</summary><p>For most accounts, 16 characters or more is recommended. For sensitive accounts like banking or email, use 20+ characters.</p></details>
+      <details><summary>Should I use symbols?</summary><p>Yes. Adding symbols dramatically increases entropy and makes passwords much harder to brute-force.</p></details>
+      <details><summary>Can hackers guess random passwords?</summary><p>Truly random passwords of sufficient length are practically impossible to guess with current computing power.</p></details>
+      <details><summary>Is this password generator safe?</summary><p>Yes. All passwords are generated locally in your browser using the Web Crypto API. Nothing is transmitted to any server.</p></details>
+      <details><summary>Are passwords stored?</summary><p>Only your recent history is saved in your browser’s local storage, on your device only. You can clear it anytime.</p></details>
+      <details><summary>Can I use generated passwords for banking?</summary><p>Absolutely. Generated passwords are cryptographically secure and suitable for banking, email, and other sensitive accounts.</p></details>
+      <details><summary>Why use a password manager?</summary><p>A password manager lets you use unique, strong passwords for every site without needing to remember them all.</p></details>
+    </div>
+  </section>
+  <section class="card">
+    <h2>About the Password Generator</h2>
+    <p>Weak passwords are the #1 cause of account compromise. A modern <strong>Password Generator</strong> helps you create <strong>strong, random, secure passwords</strong> that resist brute-force and dictionary attacks. This <strong>free online password generator</strong> uses the browser's Web Crypto API — a cryptographically secure random source — so every generated password is unpredictable.</p>
+    <h3>Password Best Practices</h3>
+    <ul>
+      <li>Use at least 16 characters for everyday accounts.</li>
+      <li>Mix uppercase, lowercase, numbers, and symbols.</li>
+      <li>Never reuse passwords across services.</li>
+      <li>Enable two-factor authentication (2FA) wherever possible.</li>
+      <li>Store passwords in a reputable password manager.</li>
+    </ul>
+  </section>
+  <section aria-labelledby="related-heading">
+    <h2 id="related-heading" class="section-title">Related Tools</h2>
+    <div class="related-grid">
+      <a class="related-card" href="../qr-code-generator/"><span>QR Code Generator</span></a>
+      <a class="related-card" href="../random-number-generator/"><span>Random Number Generator</span></a>
+      <a class="related-card" href="../word-counter/"><span>Word Counter</span></a>
+      <a class="related-card" href="../text-case-converter/"><span>Text Case Converter</span></a>
+      <a class="related-card" href="../color-picker/"><span>Color Picker</span></a>
+      <a class="related-card" href="../spin-wheel/"><span>Spin Wheel</span></a>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="../">Home</a>
+      <a href="../privacy-policy/">Privacy Policy</a>
+      <a href="../terms/">Terms</a>
+      <a href="../disclaimer/">Disclaimer</a>
+      <a href="../sitemap.xml">Sitemap</a>
+    </nav>
+    <p class="copy">© <span id="year"></span> Multi Tools. All rights reserved.</p>
+  </div>
+</footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="script.js" defer></script>
+</body>
+</html>
