@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jahanzaibranjha31.github.io/multi-tools/sitemap.xml
