@@ -314,3 +314,4 @@ section h2{ font-size: clamp(1.6rem, 3vw, 2.1rem); color: var(--navy); text-alig
   .float-card, .card-1, .card-2{ animation:none; }
   *{ transition-duration: .01ms !important; }
 }
+
