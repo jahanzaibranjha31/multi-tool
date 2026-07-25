@@ -1,140 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f7f2ea" />
-    <title>Turntable — make the choice a moment</title>
-    <meta name="description" content="A delightful wheel of names for choosing people, prizes, plans, and possibilities." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Multi Tools — Free online tools for work, code & life</title>
+    <meta name="description" content="Fast, trustworthy, free online calculators, converters, generators, productivity tools, developer utilities, SEO tools and everyday web utilities." />
+    <meta name="author" content="Multi Tools" />
     <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="Turntable — make the choice a moment" />
-    <meta property="og:description" content="Put your options on the wheel and let chance take the stage." />
+    <meta property="og:title" content="Multi Tools" />
+    <meta property="og:description" content="Your fast, free utility atlas for work, code, SEO, images, text, and everyday tasks." />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Turntable — make the choice a moment" />
-    <meta name="twitter:description" content="A cheerful, fast wheel of names for decisions worth celebrating." />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="stylesheet" href="./style.css" />
+    <meta property="og:url" content="/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Multi Tools" />
+    <meta name="twitter:description" content="Your fast, free utility atlas for work, code, SEO, images, text, and everyday tasks." />
+    <meta name="theme-color" content="#0d111d" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   </head>
   <body>
-    <div class="app-shell">
-      <header class="topbar">
-        <a class="brand" href="/" aria-label="Turntable home">
-          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
-          <span>turntable</span>
-        </a>
-        <div class="topbar-actions">
-          <span class="save-status" id="saveStatus"><span class="save-dot"></span> Saved locally</span>
-          <button class="icon-button" id="themeToggle" type="button" aria-label="Switch to dark mode" data-testid="button-theme">
-            <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
-            <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 15.1A8.5 8.5 0 0 1 8.9 3.6 8.5 8.5 0 1 0 20.4 15.1Z"></path></svg>
-          </button>
-        </div>
-      </header>
-
-      <main>
-        <section class="intro" aria-labelledby="pageTitle">
-          <div>
-            <p class="eyebrow"><span class="eyebrow-line"></span> Decision, with a little theatre</p>
-            <h1 id="pageTitle">Let the wheel<br /><em>take the stage.</em></h1>
-          </div>
-          <p class="intro-copy">Names, prizes, dinner plans, the last slice. Add your options, take a breath, and let chance make the call.</p>
-        </section>
-
-        <section class="workspace" aria-label="Wheel and options">
-          <div class="wheel-column">
-            <div class="wheel-stage" id="wheelStage">
-              <div class="stage-note stage-note-left"><span class="note-number">01</span><span>Add the possibilities</span></div>
-              <div class="stage-note stage-note-right"><span class="note-number">02</span><span>Give it a spin</span></div>
-              <div class="wheel-wrap">
-                <div class="pointer" aria-hidden="true"></div>
-                <canvas id="wheelCanvas" width="720" height="720" aria-label="Decision wheel"></canvas>
-                <div class="wheel-hub" aria-hidden="true"><span class="hub-ring"></span><span class="hub-dot"></span></div>
-              </div>
-              <div class="wheel-caption"><span id="wheelHint">Waiting for a worthy choice</span><span class="caption-divider"></span><span id="wheelCount">0 options</span></div>
-            </div>
-            <div class="spin-area">
-              <button class="spin-button" id="spinButton" type="button" data-testid="button-spin" disabled>
-                <span class="spin-label">Spin the wheel</span>
-                <span class="spin-key">Space</span>
-              </button>
-              <p class="spin-subtext" id="spinSubtext">Add at least two options to begin</p>
-            </div>
-          </div>
-
-          <aside class="control-panel" aria-label="Wheel controls">
-            <div class="panel-heading">
-              <div>
-                <p class="section-kicker">Your options</p>
-                <h2>Set the scene</h2>
-              </div>
-              <span class="count-badge" id="countBadge">0</span>
-            </div>
-
-            <div class="input-block">
-              <label for="optionsInput">One option per line</label>
-              <textarea id="optionsInput" rows="6" spellcheck="false" placeholder="Mina&#10;Theo&#10;Rae&#10;Jun" aria-describedby="inputHelp" data-testid="input-options"></textarea>
-              <div class="input-footer">
-                <span id="inputHelp">Tip: names can be as short or specific as you like.</span>
-                <span class="char-count" id="charCount">0</span>
-              </div>
-            </div>
-
-            <div class="quick-actions">
-              <button class="text-button" id="shuffleButton" type="button" data-testid="button-shuffle"><svg class="mini-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h3c4 0 7 10 11 10h4M17 5l4 2-4 2M3 17h3c1.7 0 3-1 4-2.2M17 15l4 2-4 2"></path></svg> Shuffle</button>
-              <button class="text-button" id="randomColorsButton" type="button" data-testid="button-random-colors"><svg class="mini-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path></svg> New colors</button>
-              <button class="text-button danger-text" id="clearButton" type="button" data-testid="button-clear">Clear all</button>
-            </div>
-
-            <div class="options-list" id="optionsList" aria-live="polite"></div>
-            <div class="empty-options" id="emptyOptions">
-              <div class="empty-orbit"><span></span><span></span><span></span></div>
-              <strong>Your wheel is wide open</strong>
-              <p>Start with two options above. The best decisions have a little suspense.</p>
-            </div>
-
-            <div class="settings-divider"></div>
-            <div class="setting-group">
-              <div class="setting-label-row"><label for="durationRange">Spin duration</label><output id="durationValue" for="durationRange">6 sec</output></div>
-              <input type="range" id="durationRange" min="3" max="10" value="6" step="1" data-testid="input-duration" />
-              <div class="range-labels"><span>Quick</span><span>Maximum suspense</span></div>
-            </div>
-            <div class="toggle-list">
-              <label class="toggle-row" for="removeWinner"><span><strong>Remove winner</strong><small>Keep the wheel fresh after each spin</small></span><input type="checkbox" id="removeWinner" data-testid="toggle-remove" /><span class="switch"></span></label>
-              <label class="toggle-row" for="allowDuplicates"><span><strong>Allow duplicates</strong><small>Give an option more than one slice</small></span><input type="checkbox" id="allowDuplicates" data-testid="toggle-duplicates" /><span class="switch"></span></label>
-            </div>
-            <div class="theme-picker">
-              <div class="setting-label-row"><span class="setting-label">Color mood</span><span class="theme-name" id="themeName">Citrus club</span></div>
-              <div class="theme-swatches" role="radiogroup" aria-label="Color mood">
-                <button class="theme-swatch active" type="button" data-theme="citrus" aria-label="Citrus club theme" data-testid="theme-citrus"><span></span><span></span><span></span></button>
-                <button class="theme-swatch" type="button" data-theme="tide" aria-label="Tidal pool theme" data-testid="theme-tide"><span></span><span></span><span></span></button>
-                <button class="theme-swatch" type="button" data-theme="berry" aria-label="Berry dusk theme" data-testid="theme-berry"><span></span><span></span><span></span></button>
-                <button class="theme-swatch" type="button" data-theme="meadow" aria-label="Meadow party theme" data-testid="theme-meadow"><span></span><span></span><span></span></button>
-              </div>
-            </div>
-          </aside>
-        </section>
-
-        <section class="lower-note">
-          <div class="rule"></div>
-          <p><span class="spark-mark">+</span> A tiny ceremony for everyday choices</p>
-          <p class="lower-note-right">Everything stays in your browser <span class="local-mark">⌁</span></p>
-        </section>
-      </main>
-      <footer><span>turntable / made for the moment</span><span>Press <kbd>Space</kbd> to spin</span></footer>
-    </div>
-
-    <div class="modal-backdrop" id="winnerModal" role="dialog" aria-modal="true" aria-labelledby="winnerTitle" hidden>
-      <div class="confetti" id="confetti" aria-hidden="true"></div>
-      <div class="winner-card">
-        <button class="modal-close" id="closeWinner" type="button" aria-label="Close winner dialog"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button>
-        <p class="winner-kicker"><span class="winner-star">✦</span> The wheel has spoken</p>
-        <h2 id="winnerTitle">It's your turn, <em>Rae.</em></h2>
-        <div class="winner-slice" id="winnerSlice"></div>
-        <p class="winner-message" id="winnerMessage">A very good choice, if we may say so.</p>
-        <button class="modal-action" id="spinAgainButton" type="button">Spin again <span>↗</span></button>
-      </div>
-    </div>
-    <script type="module" src="./script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
