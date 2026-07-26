@@ -1,0 +1,26 @@
+name: PageSpeed Audit
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  pagespeed:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start Server
+        run: |
+          python3 -m http.server 8080 &
+          sleep 5
+
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://localhost:8080/
+          uploadArtifacts: true
+          temporaryPublicStorage: true
