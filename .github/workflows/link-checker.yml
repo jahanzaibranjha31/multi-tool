@@ -1,0 +1,29 @@
+name: Link Checker
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start local server
+        run: |
+          python3 -m http.server 8080 &
+          sleep 5
+
+      - name: Check Links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >
+            --base http://localhost:8080
+            --verbose
+            .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
