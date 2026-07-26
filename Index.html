@@ -395,6 +395,362 @@
       </div>
     </div>
   </section>
+  <!-- ============================================================
+     LATEST BLOG ARTICLES SECTION
+     Paste this entire block into index.html:
+     - Place it AFTER your Popular Tools section closes
+     - Place it BEFORE your Why Choose Us section opens
+     - The <style> block can stay here or be moved into your
+       main CSS file — either works, nothing is scoped to <head>.
+     ============================================================ -->
+
+<style>
+  /* ---------- Latest Blog Articles: Glassmorphism Styles ---------- */
+  .blog-section {
+    padding: 80px 20px;
+    position: relative;
+  }
+
+  .blog-section .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+  }
+
+  .blog-section .section-header h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .blog-section .section-header p {
+    font-size: 1.05rem;
+    opacity: 0.8;
+    line-height: 1.6;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+
+  .blog-card:hover,
+  .blog-card:focus-within {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .blog-card__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .blog-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .blog-card:hover .blog-card__media img {
+    transform: scale(1.08);
+  }
+
+  .blog-card__badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 6px 14px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-radius: 999px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .blog-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 22px 22px 24px;
+  }
+
+  .blog-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.8rem;
+    opacity: 0.75;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .blog-card__meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .blog-card__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .blog-card__title a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .blog-card__title a:hover,
+  .blog-card__title a:focus {
+    text-decoration: underline;
+  }
+
+  .blog-card__excerpt {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    opacity: 0.85;
+    margin-bottom: 20px;
+    flex: 1;
+  }
+
+  .blog-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .blog-card__cta:hover,
+  .blog-card__cta:focus {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateX(3px);
+  }
+
+  .blog-section__footer {
+    text-align: center;
+    margin-top: 46px;
+  }
+
+  .btn-view-all-blogs {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 34px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .btn-view-all-blogs:hover,
+  .btn-view-all-blogs:focus {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+  }
+
+  @media (max-width: 480px) {
+    .blog-section { padding: 56px 16px; }
+    .blog-card__body { padding: 18px 18px 20px; }
+  }
+</style>
+
+<!-- ---------- Latest Blog Articles: Markup ---------- -->
+<section class="blog-section" id="latest-blog-articles" aria-labelledby="blog-section-heading">
+  <div class="section-header">
+    <h2 id="blog-section-heading">Latest Blog Articles</h2>
+    <p>Guides, tips, and tutorials to help you get the most out of our free online tools.</p>
+  </div>
+
+  <div class="blog-grid">
+
+    <article class="blog-card">
+      <div class="blog-card__media">
+        <img src="assets/images/blog/spin-wheel-guide.jpg"
+             alt="Spin wheel tool interface showing a colorful decision wheel"
+             loading="lazy" width="600" height="338">
+        <span class="blog-card__badge">Tools</span>
+      </div>
+      <div class="blog-card__body">
+        <div class="blog-card__meta">
+          <span><time datetime="2026-07-10">Jul 10, 2026</time></span>
+          <span>5 min read</span>
+        </div>
+        <h3 class="blog-card__title">
+          <a href="blog/spin-wheel-guide/">How to Use a Spin Wheel Tool for Fair Random Decisions</a>
+        </h3>
+        <p class="blog-card__excerpt">Learn how a free online spin wheel can help you make quick, unbiased decisions for giveaways, games, and everyday choices.</p>
+        <a class="blog-card__cta" href="blog/spin-wheel-guide/">
+          Read More <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="blog-card">
+      <div class="blog-card__media">
+        <img src="assets/images/blog/password-security-guide.jpg"
+             alt="Padlock icon representing password security best practices"
+             loading="lazy" width="600" height="338">
+        <span class="blog-card__badge">Security</span>
+      </div>
+      <div class="blog-card__body">
+        <div class="blog-card__meta">
+          <span><time datetime="2026-07-08">Jul 8, 2026</time></span>
+          <span>7 min read</span>
+        </div>
+        <h3 class="blog-card__title">
+          <a href="blog/password-security-guide/">Password Security Guide: How to Create Unbreakable Passwords</a>
+        </h3>
+        <p class="blog-card__excerpt">Discover practical strategies and tools for generating strong passwords and protecting your accounts from common attacks.</p>
+        <a class="blog-card__cta" href="blog/password-security-guide/">
+          Read More <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="blog-card">
+      <div class="blog-card__media">
+        <img src="assets/images/blog/qr-code-guide.jpg"
+             alt="QR code being scanned by a smartphone camera"
+             loading="lazy" width="600" height="338">
+        <span class="blog-card__badge">Tools</span>
+      </div>
+      <div class="blog-card__body">
+        <div class="blog-card__meta">
+          <span><time datetime="2026-07-05">Jul 5, 2026</time></span>
+          <span>4 min read</span>
+        </div>
+        <h3 class="blog-card__title">
+          <a href="blog/qr-code-guide/">The Complete Guide to Generating and Scanning QR Codes</a>
+        </h3>
+        <p class="blog-card__excerpt">Everything you need to know about creating custom QR codes for business, marketing, and personal use in minutes.</p>
+        <a class="blog-card__cta" href="blog/qr-code-guide/">
+          Read More <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="blog-card">
+      <div class="blog-card__media">
+        <img src="assets/images/blog/bmi-calculator-guide.jpg"
+             alt="BMI calculator dashboard displaying health metrics"
+             loading="lazy" width="600" height="338">
+        <span class="blog-card__badge">Health</span>
+      </div>
+      <div class="blog-card__body">
+        <div class="blog-card__meta">
+          <span><time datetime="2026-07-02">Jul 2, 2026</time></span>
+          <span>6 min read</span>
+        </div>
+        <h3 class="blog-card__title">
+          <a href="blog/bmi-calculator-guide/">BMI Calculator Explained: How to Track Your Healthy Weight</a>
+        </h3>
+        <p class="blog-card__excerpt">Understand what your BMI result really means and how to use our free calculator to set realistic health goals.</p>
+        <a class="blog-card__cta" href="blog/bmi-calculator-guide/">
+          Read More <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="blog-card">
+      <div class="blog-card__media">
+        <img src="assets/images/blog/scientific-calculator-guide.jpg"
+             alt="Scientific calculator interface with math functions"
+             loading="lazy" width="600" height="338">
+        <span class="blog-card__badge">Education</span>
+      </div>
+      <div class="blog-card__body">
+        <div class="blog-card__meta">
+          <span><time datetime="2026-06-28">Jun 28, 2026</time></span>
+          <span>5 min read</span>
+        </div>
+        <h3 class="blog-card__title">
+          <a href="blog/scientific-calculator-guide/">Scientific Calculator Guide: Functions Every Student Should Know</a>
+        </h3>
+        <p class="blog-card__excerpt">A breakdown of essential scientific calculator functions, from trigonometry to logarithms, explained simply.</p>
+        <a class="blog-card__cta" href="blog/scientific-calculator-guide/">
+          Read More <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="blog-card">
+      <div class="blog-card__media">
+        <img src="assets/images/blog/online-tools-guide.jpg"
+             alt="Collage of free online tools icons on a dashboard"
+             loading="lazy" width="600" height="338">
+        <span class="blog-card__badge">Guides</span>
+      </div>
+      <div class="blog-card__body">
+        <div class="blog-card__meta">
+          <span><time datetime="2026-06-24">Jun 24, 2026</time></span>
+          <span>8 min read</span>
+        </div>
+        <h3 class="blog-card__title">
+          <a href="blog/online-tools-guide/">10 Free Online Tools That Boost Your Daily Productivity</a>
+        </h3>
+        <p class="blog-card__excerpt">A curated roundup of the most useful free online tools for work, study, and everyday tasks — no downloads needed.</p>
+        <a class="blog-card__cta" href="blog/online-tools-guide/">
+          Read More <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="blog-section__footer">
+    <a class="btn-view-all-blogs" href="blog/">
+      View All Blogs <span aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</section>
+
 
   <!-- ============ WHY CHOOSE US ============ -->
   <section class="section" id="about">
