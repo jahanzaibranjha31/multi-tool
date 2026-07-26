@@ -1,0 +1,40 @@
+name: Validate JSON-LD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  schema:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Validate JSON-LD
+        run: |
+          find . -name "*.html" | while read file
+          do
+            echo "Checking $file"
+
+            python3 <<'PY' "$file"
+import re,sys,json
+from pathlib import Path
+
+text=Path(sys.argv[1]).read_text(errors="ignore")
+
+for match in re.findall(r'<script[^>]*application/ld\+json[^>]*>(.*?)</script>',text,re.S):
+    json.loads(match)
+
+print("OK")
+PY
+
+          done
