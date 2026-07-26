@@ -1,0 +1,58 @@
+name: Auto Generate RSS Feed
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  rss:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate feed.xml
+        shell: bash
+        run: |
+          BASE_URL="https://jahanzaibranjha31.github.io/multi-tools"
+
+          TODAY=$(date -R)
+
+          cat > feed.xml <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <rss version="2.0">
+          <channel>
+          <title>Multi Tools Blog</title>
+          <link>$BASE_URL/blog/</link>
+          <description>Free Online Tools and Tutorials</description>
+          EOF
+
+          find blog -name index.html | while read file
+          do
+            DIR=$(dirname "$file")
+            URL="$BASE_URL/$DIR/"
+
+            echo "<item>" >> feed.xml
+            echo "<title>${DIR##*/}</title>" >> feed.xml
+            echo "<link>$URL</link>" >> feed.xml
+            echo "<pubDate>$TODAY</pubDate>" >> feed.xml
+            echo "</item>" >> feed.xml
+          done
+
+          echo "</channel></rss>" >> feed.xml
+
+      - name: Commit RSS
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git add feed.xml
+
+          git diff --cached --quiet || {
+            git commit -m "Auto update feed.xml"
+            git push
+          }
