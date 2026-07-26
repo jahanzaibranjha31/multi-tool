@@ -1,0 +1,28 @@
+name: Lighthouse Audit
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Start local server
+        run: |
+          python3 -m http.server 8080 &
+          sleep 5
+
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://localhost:8080/
+          uploadArtifacts: true
+          temporaryPublicStorage: true
