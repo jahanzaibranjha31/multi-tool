@@ -1,0 +1,73 @@
+name: Auto Generate Sitemap
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-sitemap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate sitemap.xml
+        shell: bash
+        run: |
+          BASE_URL="https://jahanzaibranjha31.github.io/multi-tools"
+
+          TODAY=$(date +%F)
+
+          cat > sitemap.xml <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+          EOF
+
+          find . -type f -name "index.html" \
+            ! -path "./.github/*" \
+            ! -path "./node_modules/*" \
+            ! -path "./vendor/*" \
+            | sort | while read file
+          do
+            DIR=$(dirname "$file")
+
+            if [ "$DIR" = "." ]; then
+              URL="$BASE_URL/"
+              PRIORITY="1.0"
+            else
+              DIR=${DIR#./}
+              URL="$BASE_URL/$DIR/"
+              PRIORITY="0.8"
+            fi
+
+            cat >> sitemap.xml <<EOF
+            <url>
+              <loc>$URL</loc>
+              <lastmod>$TODAY</lastmod>
+              <changefreq>weekly</changefreq>
+              <priority>$PRIORITY</priority>
+            </url>
+          EOF
+          done
+
+          echo "</urlset>" >> sitemap.xml
+
+      - name: Commit sitemap
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add sitemap.xml
+
+          if git diff --cached --quiet; then
+            echo "No sitemap changes."
+          else
+            git commit -m "Auto-update sitemap.xml"
+            git push
+          fi
