@@ -1,114 +1,455 @@
-/* =========================================================
-   MULTI TOOLS — script.js (vanilla JS, no dependencies)
-   ========================================================= */
-(function () {
-  "use strict";
+/* =============================================
+   MULTI TOOLS — script.js
+   Vanilla JS · No frameworks · GitHub Pages
+   ============================================= */
 
-  /* ---------- Tool directory (used for search) ---------- */
-  var TOOLS = [
-    { name: "Spin Wheel", href: "spin-wheel/", icon: "icon-spin", keywords: "spin wheel random decision picker" },
-    { name: "Scientific Calculator", href: "scientific-calculator/", icon: "icon-calc", keywords: "calculator math scientific equations" },
-    { name: "Age Calculator", href: "age-calculator/", icon: "icon-age", keywords: "age calculator birthday date" },
-    { name: "BMI Calculator", href: "bmi-calculator/", icon: "icon-bmi", keywords: "bmi calculator health weight fitness" },
-    { name: "Percentage Calculator", href: "percentage-calculator/", icon: "icon-percent", keywords: "percentage calculator math percent" },
-    { name: "Password Generator", href: "password-generator/", icon: "icon-password", keywords: "password generator secure random security" },
-    { name: "QR Code Generator", href: "qr-code-generator/", icon: "icon-qr", keywords: "qr code generator scan link" },
-    { name: "Random Number Generator", href: "random-number-generator/", icon: "icon-random", keywords: "random number generator dice pick" },
-    { name: "Word Counter", href: "word-counter/", icon: "icon-word", keywords: "word counter text writing count" },
-    { name: "Character Counter", href: "character-counter/", icon: "icon-char", keywords: "character counter text limit count" },
-    { name: "Color Picker", href: "color-picker/", icon: "icon-color", keywords: "color picker hex rgb palette design" },
-    { name: "Unit Converter", href: "unit-converter/", icon: "icon-convert", keywords: "unit converter length weight temperature" },
-    { name: "Calculators", href: "calculators/", icon: "icon-calcs", keywords: "calculators category" },
-    { name: "Converters", href: "converters/", icon: "icon-convert", keywords: "converters category" },
-    { name: "Text Tools", href: "text-tools/", icon: "icon-text", keywords: "text tools category" },
-    { name: "Image Tools", href: "image-tools/", icon: "icon-image", keywords: "image tools category" },
-    { name: "PDF Tools", href: "pdf-tools/", icon: "icon-pdf", keywords: "pdf tools category" },
-    { name: "SEO Tools", href: "seo-tools/", icon: "icon-seo", keywords: "seo tools category" },
-    { name: "Developer Tools", href: "developer-tools/", icon: "icon-dev", keywords: "developer tools category code" },
-    { name: "Generators", href: "generators/", icon: "icon-gen", keywords: "generators category" },
-    { name: "Productivity", href: "productivity/", icon: "icon-productivity", keywords: "productivity category" },
-    { name: "Random Tools", href: "random-tools/", icon: "icon-shuffle", keywords: "random tools category" }
-  ];
+'use strict';
 
-  var root = document.documentElement;
+/* ── State ────────────────────────────────── */
+let allTools   = [];
+let allBlogs   = [];
+let activeCategory = 'All';
+let searchQuery    = '';
 
-  /* =========================================================
-     THEME TOGGLE (persisted, respects system preference)
-     ========================================================= */
-  (function initTheme() {
-    var stored = null;
-    try { stored = localStorage.getItem("mt-theme"); } catch (e) {}
-    var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    var theme = stored || (prefersDark ? "dark" : "light");
-    root.setAttribute("data-theme", theme);
+/* ── DOM Refs ─────────────────────────────── */
+const toolsGrid      = document.getElementById('tools-grid');
+const featuredGrid   = document.getElementById('featured-grid');
+const blogsGrid      = document.getElementById('blogs-grid');
+const catFilters     = document.getElementById('category-filters');
+const searchInput    = document.getElementById('search-input');
+const searchCount    = document.getElementById('search-count');
+const noResults      = document.getElementById('search-no-results');
+const statTools      = document.getElementById('stat-tools');
+const statBlogs      = document.getElementById('stat-blogs');
+const statCats       = document.getElementById('stat-cats');
+const heroTools      = document.getElementById('hero-tools');
+const heroBlog       = document.getElementById('hero-blogs');
+const heroCats       = document.getElementById('hero-cats');
+const backToTop      = document.getElementById('back-to-top');
+const navbar         = document.getElementById('navbar');
+const navToggle      = document.getElementById('nav-toggle');
+const navLinks       = document.getElementById('nav-links');
+const currentYear    = document.getElementById('current-year');
+const faqList        = document.getElementById('faq-list');
+const newsletterForm = document.getElementById('newsletter-form');
+const newsletterMsg  = document.getElementById('newsletter-msg');
 
-    var btn = document.getElementById("themeToggle");
-    if (btn) {
-      btn.addEventListener("click", function () {
-        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", next);
-        try { localStorage.setItem("mt-theme", next); } catch (e) {}
-      });
+/* ── Bootstrap ────────────────────────────── */
+document.addEventListener('DOMContentLoaded', init);
+
+async function init() {
+  if (currentYear) currentYear.textContent = new Date().getFullYear();
+  setupNavbar();
+  setupBackToTop();
+  setupScrollReveal();
+  setupFAQ();
+  setupNewsletter();
+
+  // Load data in parallel
+  const [tools, blogs] = await Promise.all([fetchTools(), fetchBlogs()]);
+  allTools = tools;
+  allBlogs = blogs;
+
+  buildCategories();
+  renderTools();
+  renderFeatured();
+  renderBlogs();
+  animateStats();
+  updateMetaStats();
+}
+
+/* ── Fetch helpers ────────────────────────── */
+async function fetchTools() {
+  try {
+    const r = await fetch('tools.json');
+    if (!r.ok) throw new Error('tools.json not found');
+    return await r.json();
+  } catch (e) {
+    console.warn('Could not load tools.json', e);
+    return [];
+  }
+}
+
+async function fetchBlogs() {
+  try {
+    const r = await fetch('blogs.json');
+    if (!r.ok) throw new Error('blogs.json not found');
+    return await r.json();
+  } catch (e) {
+    console.warn('Could not load blogs.json', e);
+    return [];
+  }
+}
+
+/* ── Category builder ─────────────────────── */
+function buildCategories() {
+  const countMap = {};
+  allTools.forEach(t => {
+    const c = t.category || 'Other';
+    countMap[c] = (countMap[c] || 0) + 1;
+  });
+
+  const sorted = Object.entries(countMap).sort((a, b) => b[1] - a[1]);
+  const total  = allTools.length;
+
+  if (!catFilters) return;
+  catFilters.innerHTML = '';
+
+  // All pill
+  const allPill = makePill('All', total, true);
+  catFilters.appendChild(allPill);
+
+  sorted.forEach(([cat, count]) => {
+    catFilters.appendChild(makePill(cat, count, false));
+  });
+}
+
+function makePill(label, count, active) {
+  const btn = document.createElement('button');
+  btn.className = 'cat-pill' + (active ? ' active' : '');
+  btn.setAttribute('aria-pressed', String(active));
+  btn.dataset.cat = label;
+  btn.innerHTML = `${esc(label)} <span class="cat-count">${count}</span>`;
+  btn.addEventListener('click', () => selectCategory(label));
+  return btn;
+}
+
+function selectCategory(cat) {
+  activeCategory = cat;
+  catFilters.querySelectorAll('.cat-pill').forEach(p => {
+    const a = p.dataset.cat === cat;
+    p.classList.toggle('active', a);
+    p.setAttribute('aria-pressed', String(a));
+  });
+  renderTools();
+}
+
+/* ── Tool rendering ───────────────────────── */
+function filteredTools() {
+  const q = searchQuery.toLowerCase().trim();
+  return allTools.filter(t => {
+    const catMatch = activeCategory === 'All' || t.category === activeCategory;
+    if (!catMatch) return false;
+    if (!q) return true;
+    const haystack = [t.name, t.category, t.description, ...(t.tags || [])]
+      .join(' ').toLowerCase();
+    return haystack.includes(q);
+  });
+}
+
+function renderTools() {
+  if (!toolsGrid) return;
+  const tools = filteredTools();
+
+  if (searchCount) searchCount.textContent = `${tools.length} tool${tools.length !== 1 ? 's' : ''}`;
+  if (noResults) noResults.style.display = tools.length === 0 ? 'block' : 'none';
+
+  toolsGrid.innerHTML = '';
+  tools.forEach((tool, i) => {
+    const card = buildToolCard(tool, i);
+    toolsGrid.appendChild(card);
+  });
+}
+
+function buildToolCard(tool, delay) {
+  const a = document.createElement('a');
+  a.href        = tool.url;
+  a.className   = 'tool-card';
+  a.setAttribute('aria-label', tool.name);
+  a.style.animationDelay = `${Math.min(delay * 0.05, 0.5)}s`;
+
+  // 404 guard: mark cards as "checking"
+  a.dataset.url = tool.url;
+
+  a.innerHTML = `
+    ${tool.featured ? '<span class="tool-card-featured" aria-label="Featured">⭐ Featured</span>' : ''}
+    <div class="tool-icon" aria-hidden="true">${esc(tool.icon || '🔧')}</div>
+    <div class="tool-card-name">${esc(tool.name)}</div>
+    <div class="tool-card-desc">${esc(tool.description || '')}</div>
+    <div class="tool-card-footer">
+      <span class="tool-card-cat">${esc(tool.category || '')}</span>
+      <span class="tool-card-open" aria-hidden="true">Open →</span>
+    </div>
+  `;
+
+  // 404 guard: verify the URL exists before showing the card
+  verifyUrl(tool.url, exists => {
+    if (!exists) {
+      a.style.display = 'none';
+      a.setAttribute('aria-hidden', 'true');
     }
-  })();
+  });
 
-  /* =========================================================
-     STICKY HEADER SHADOW ON SCROLL
-     ========================================================= */
-  var header = document.getElementById("siteHeader");
-  var backToTop = document.getElementById("backToTop");
-  function onScroll() {
-    var scrolled = window.scrollY > 12;
-    if (header) header.classList.toggle("is-scrolled", scrolled);
-    if (backToTop) backToTop.classList.toggle("is-visible", window.scrollY > 480);
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  return a;
+}
 
-  if (backToTop) {
-    backToTop.addEventListener("click", function () {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+function renderFeatured() {
+  if (!featuredGrid) return;
+  const featured = allTools
+    .filter(t => t.featured)
+    .slice(0, 6);
+
+  if (featured.length === 0) {
+    const wrap = featuredGrid.closest('section');
+    if (wrap) wrap.style.display = 'none';
+    return;
   }
 
-  /* =========================================================
-     MOBILE NAV TOGGLE
-     ========================================================= */
-  var navToggle = document.getElementById("navToggle");
-  var mainNav = document.getElementById("mainNav");
-  if (navToggle && mainNav) {
-    navToggle.addEventListener("click", function () {
-      var open = mainNav.classList.toggle("is-open");
-      navToggle.setAttribute("aria-expanded", String(open));
+  featuredGrid.innerHTML = '';
+  featured.forEach((tool, i) => {
+    featuredGrid.appendChild(buildToolCard(tool, i));
+  });
+}
+
+/* ── Blog rendering ───────────────────────── */
+function renderBlogs() {
+  if (!blogsGrid) return;
+
+  // Sort newest first
+  const blogs = [...allBlogs].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  if (blogs.length === 0) {
+    const wrap = blogsGrid.closest('section');
+    if (wrap) wrap.style.display = 'none';
+    return;
+  }
+
+  blogsGrid.innerHTML = '';
+  blogs.forEach((blog, i) => {
+    blogsGrid.appendChild(buildBlogCard(blog, i));
+  });
+}
+
+function buildBlogCard(blog, delay) {
+  const a = document.createElement('a');
+  a.href      = blog.url;
+  a.className = 'blog-card';
+  a.setAttribute('aria-label', blog.title);
+  a.style.animationDelay = `${Math.min(delay * 0.08, 0.5)}s`;
+
+  const imgHtml = blog.image
+    ? `<img src="${esc(blog.image)}" alt="${esc(blog.title)}" class="blog-card-img" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'blog-card-img-placeholder\\'>📝</div>'">`
+    : `<div class="blog-card-img-placeholder" aria-hidden="true">📝</div>`;
+
+  a.innerHTML = `
+    ${imgHtml}
+    <div class="blog-card-body">
+      <span class="blog-card-cat">${esc(blog.category || '')}</span>
+      <div class="blog-card-title">${esc(blog.title)}</div>
+      <div class="blog-card-desc">${esc(blog.description || '')}</div>
+      <div class="blog-card-footer">
+        <span class="blog-card-date">${formatDate(blog.date)}</span>
+        <span class="blog-read-more" aria-hidden="true">Read More →</span>
+      </div>
+    </div>
+  `;
+
+  return a;
+}
+
+/* ── Stats animation ──────────────────────── */
+function animateStats() {
+  const cats = new Set(allTools.map(t => t.category)).size;
+
+  animateCount(statTools,  allTools.length);
+  animateCount(statBlogs,  allBlogs.length);
+  animateCount(statCats,   cats);
+  animateCount(heroTools,  allTools.length);
+  animateCount(heroBlog,   allBlogs.length);
+  animateCount(heroCats,   cats);
+}
+
+function animateCount(el, target) {
+  if (!el) return;
+  const duration = 1200;
+  const start    = performance.now();
+
+  const tick = now => {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+    el.textContent = Math.round(eased * target);
+    if (progress < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+function updateMetaStats() {
+  // Update meta description stat if present
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && allTools.length > 0) {
+    const cats = new Set(allTools.map(t => t.category)).size;
+    metaDesc.content =
+      `Multi Tools — ${allTools.length}+ free online tools including calculators, generators, converters, and ${cats} categories. No sign-up required.`;
+  }
+}
+
+/* ── Search ───────────────────────────────── */
+if (searchInput) {
+  let debounceTimer;
+  searchInput.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      searchQuery = searchInput.value;
+      renderTools();
+      // Reset category pill counts are unaffected — intentional
+    }, 150);
+  });
+
+  // Clear on Escape
+  searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      searchInput.value = '';
+      searchQuery = '';
+      renderTools();
+    }
+  });
+}
+
+/* ── 404 guard ────────────────────────────── */
+const urlCache = {};
+
+function verifyUrl(url, callback) {
+  if (url in urlCache) {
+    callback(urlCache[url]);
+    return;
+  }
+  // Use a lightweight HEAD request; fall back gracefully on CORS/network errors
+  fetch(url, { method: 'HEAD' })
+    .then(r => {
+      urlCache[url] = r.ok;
+      callback(r.ok);
+    })
+    .catch(() => {
+      // On fetch failure (offline, CORS), assume URL is valid to avoid hiding tools
+      urlCache[url] = true;
+      callback(true);
     });
-    mainNav.querySelectorAll(".nav-link").forEach(function (link) {
-      link.addEventListener("click", function () {
-        mainNav.classList.remove("is-open");
-        navToggle.setAttribute("aria-expanded", "false");
+}
+
+/* ── Navbar ───────────────────────────────── */
+function setupNavbar() {
+  if (!navbar) return;
+
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+    if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+
+    // Close on link click (mobile)
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
+}
 
-  /* highlight active nav link on scroll */
-  var navLinks = document.querySelectorAll(".nav-link");
-  var sections = Array.prototype.slice.call(document.querySelectorAll("main section[id], .hero[id]"));
-  function updateActiveNav() {
-    var pos = window.scrollY + (header ? header.offsetHeight : 0) + 40;
-    var current = sections[0];
-    sections.forEach(function (sec) {
-      if (sec.offsetTop <= pos) current = sec;
-    });
-    navLinks.forEach(function (link) {
-      var match = current && link.getAttribute("href") === "#" + current.id;
-      link.classList.toggle("is-active", !!match);
-    });
-  }
-  window.addEventListener("scroll", updateActiveNav, { passive: true });
-  updateActiveNav();
+/* ── Back to Top ──────────────────────────── */
+function setupBackToTop() {
+  if (!backToTop) return;
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
 
-  /* =========================================================
-     SEARCH OVERLAY
-     ========================================================= */
+/* ── Scroll Reveal ────────────────────────── */
+function setupScrollReveal() {
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  els.forEach(el => io.observe(el));
+}
+
+/* ── FAQ ──────────────────────────────────── */
+function setupFAQ() {
+  if (!faqList) return;
+
+  faqList.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+}
+
+/* ── Newsletter ───────────────────────────── */
+function setupNewsletter() {
+  if (!newsletterForm) return;
+  newsletterForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = newsletterForm.querySelector('input[type="email"]').value.trim();
+    if (!email) return;
+    if (newsletterMsg) {
+      newsletterMsg.textContent = '🎉 Thank you! You\'re on the list.';
+      newsletterMsg.style.color = '#a3e635';
+    }
+    newsletterForm.reset();
+  });
+}
+
+/* ── Helpers ──────────────────────────────── */
+function esc(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function formatDate(str) {
+  if (!str) return '';
+  try {
+    return new Date(str).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  } catch { return str; }
+}
+
+/* ── Schema.org dynamic injection ────────── */
+function injectItemListSchema() {
+  if (allTools.length === 0) return;
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    'name': 'Free Online Tools',
+    'description': 'A collection of free online tools including calculators, generators, and converters.',
+    'numberOfItems': allTools.length,
+    'itemListElement': allTools.map((t, i) => ({
+      '@type': 'ListItem',
+      'position': i + 1,
+      'name': t.name,
+      'url': window.location.origin + window.location.pathname.replace(/\/?$/, '/') + t.url,
+      'description': t.description || ''
+    }))
+  };
+  const el = document.getElementById('schema-itemlist');
+  if (el) el.textContent = JSON.stringify(schema);
+}
+
+// Inject after data loads
+document.addEventListener('DOMContentLoaded', () => {
+  // Give init() a moment to complete
+  setTimeout(injectItemListSchema, 500);
+});
   var searchToggle = document.getElementById("searchToggle");
   var searchOverlay = document.getElementById("searchOverlay");
   var searchClose = document.getElementById("searchClose");
