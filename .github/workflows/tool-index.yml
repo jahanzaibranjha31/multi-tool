@@ -1,0 +1,61 @@
+name: Update Tool Index
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update-tools:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Generate tools.json
+        run: |
+          mkdir -p assets
+
+          echo "[" > assets/tools.json
+
+          first=true
+
+          for dir in */ ; do
+            folder="${dir%/}"
+
+            if [[ "$folder" != ".github" && "$folder" != "assets" && "$folder" != "Blog" ]]; then
+              if [ -f "$folder/index.html" ]; then
+
+                if [ "$first" = true ]; then
+                  first=false
+                else
+                  echo "," >> assets/tools.json
+                fi
+
+                title=$(echo "$folder" | sed 's/-/ /g')
+
+                echo "  {" >> assets/tools.json
+                echo "    \"name\": \"$title\"," >> assets/tools.json
+                echo "    \"url\": \"$folder/\"" >> assets/tools.json
+                echo "  }" >> assets/tools.json
+
+              fi
+            fi
+          done
+
+          echo "]" >> assets/tools.json
+
+      - name: Commit Changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add assets/tools.json
+
+          git diff --cached --quiet || git commit -m "Auto update tools index"
+
+          git push
