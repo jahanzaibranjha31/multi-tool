@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Spin Wheel",
+    "url": "spin-wheel/",
+    "icon": "🎡",
+    "category": "Random Tools",
+    "description": "Spin the wheel online and get a random result. Perfect for decisions, games, and giveaways.",
+    "tags": ["random", "wheel", "spinner", "decision"],
+    "featured": true
+  },
+  {
+    "name": "QR Code Generator",
+    "url": "qr-code-generator/",
+    "icon": "📱",
+    "category": "Generators",
+    "description": "Generate QR codes instantly for URLs, text, contacts, and more. Download in high resolution.",
+    "tags": ["qr", "code", "generator", "barcode"],
+    "featured": true
+  },
+  {
+    "name": "Password Generator",
+    "url": "password-generator/",
+    "icon": "🔐",
+    "category": "Security Tools",
+    "description": "Generate strong, secure passwords with custom length and character options.",
+    "tags": ["password", "security", "random", "generator"],
+    "featured": true
+  },
+  {
+    "name": "BMI Calculator",
+    "url": "bmi-calculator/",
+    "icon": "⚖️",
+    "category": "Health",
+    "description": "Calculate your Body Mass Index instantly. Check if you're underweight, normal, or overweight.",
+    "tags": ["bmi", "health", "weight", "calculator"],
+    "featured": false
+  },
+  {
+    "name": "Age Calculator",
+    "url": "age-calculator/",
+    "icon": "🎂",
+    "category": "Calculators",
+    "description": "Calculate your exact age in years, months, and days from your date of birth.",
+    "tags": ["age", "birthday", "date", "calculator"],
+    "featured": false
+  },
+  {
+    "name": "Character Counter",
+    "url": "character-counter/",
+    "icon": "🔤",
+    "category": "Text Tools",
+    "description": "Count characters, words, sentences, and paragraphs in real time. Great for social media posts.",
+    "tags": ["character", "word", "count", "text"],
+    "featured": false
+  }
+]
