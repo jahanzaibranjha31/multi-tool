@@ -1,0 +1,52 @@
+name: Auto Internal Links Checker
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  internal-links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Scan HTML Files
+        run: |
+          echo "Checking internal links..."
+
+          find . -name "*.html" > htmlfiles.txt
+
+          while read file; do
+            echo "Scanning $file"
+
+            grep -oE 'href="[^"]+"' "$file" | \
+            sed 's/href="//;s/"//' | \
+            while read link; do
+
+              # Ignore external links
+              if [[ "$link" == http* ]]; then
+                continue
+              fi
+
+              # Ignore anchors, mailto and javascript
+              if [[ "$link" == \#* || "$link" == mailto:* || "$link" == javascript:* ]]; then
+                continue
+              fi
+
+              target=$(realpath "$(dirname "$file")/$link" 2>/dev/null)
+
+              if [[ ! -e "$target" ]]; then
+                echo "::warning file=$file::Broken internal link -> $link"
+              fi
+
+            done
+
+          done < htmlfiles.txt
+
+      - name: Finished
+        run: echo "Internal link scan completed."
