@@ -1,0 +1,69 @@
+name: Dead Page Cleaner
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Remove missing URLs from sitemap.xml
+        run: |
+          python3 << 'EOF'
+          import os
+          import xml.etree.ElementTree as ET
+
+          sitemap = "sitemap.xml"
+
+          if not os.path.exists(sitemap):
+              print("No sitemap.xml found.")
+              exit(0)
+
+          ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+
+          ET.register_namespace("", ns["sm"])
+
+          tree = ET.parse(sitemap)
+          root = tree.getroot()
+
+          removed = 0
+
+          for url in list(root.findall("sm:url", ns)):
+              loc = url.find("sm:loc", ns)
+              if loc is None:
+                  continue
+
+              page = loc.text.replace(
+                  "https://jahanzaibranjha31.github.io/multi-tools/",
+                  ""
+              ).strip("/")
+
+              if page == "":
+                  file_path = "index.html"
+              else:
+                  file_path = os.path.join(page, "index.html")
+
+              if not os.path.exists(file_path):
+                  root.remove(url)
+                  removed += 1
+                  print(f"Removed: {loc.text}")
+
+          tree.write(sitemap, encoding="utf-8", xml_declaration=True)
+
+          print(f"Finished. Removed {removed} dead pages.")
+          EOF
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto remove deleted pages from sitemap"
