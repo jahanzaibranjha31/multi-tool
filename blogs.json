@@ -1,0 +1,33 @@
+[
+  {
+    "title": "BMI Calculator: Complete Guide to Understanding Your Body Mass Index",
+    "url": "Blog/bmi-calculator-guide/",
+    "image": "Blog/images/bmi-guide.webp",
+    "date": "2026-07-25",
+    "category": "Health",
+    "description": "Learn how to use our BMI calculator correctly and understand what your results mean for your health.",
+    "tags": ["bmi", "health", "calculator", "fitness"],
+    "relatedTools": ["bmi-calculator/"]
+  },
+  {
+    "title": "How to Generate Strong Passwords: A Security Guide for 2026",
+    "url": "Blog/password-security-guide/",
+    "image": "Blog/images/password-guide.webp",
+    "date": "2026-07-20",
+    "category": "Security",
+    "description": "Everything you need to know about creating and managing secure passwords to protect your accounts online.",
+    "tags": ["password", "security", "online safety"],
+    "relatedTools": ["password-generator/"]
+  },
+  {
+    "title": "QR Codes Explained: How to Create and Use QR Codes for Free",
+    "url": "Blog/qr-code-guide/",
+    "image": "Blog/images/qr-guide.webp",
+    "date": "2026-07-15",
+    "category": "Generators",
+    "description": "A complete beginner's guide to QR codes — what they are, how they work, and how to generate them for free.",
+    "tags": ["qr code", "generator", "marketing"],
+    "relatedTools": ["qr-code-generator/"]
+  }
+]
+
