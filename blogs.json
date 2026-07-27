@@ -1,33 +1,82 @@
 [
   {
-    "title": "BMI Calculator: Complete Guide to Understanding Your Body Mass Index",
-    "url": "Blog/bmi-calculator-guide/",
-    "image": "Blog/images/bmi-guide.webp",
-    "date": "2026-07-25",
-    "category": "Health",
-    "description": "Learn how to use our BMI calculator correctly and understand what your results mean for your health.",
-    "tags": ["bmi", "health", "calculator", "fitness"],
-    "relatedTools": ["bmi-calculator/"]
-  },
-  {
-    "title": "How to Generate Strong Passwords: A Security Guide for 2026",
-    "url": "Blog/password-security-guide/",
-    "image": "Blog/images/password-guide.webp",
-    "date": "2026-07-20",
+    "title": "How to Create an Unbreakable Password in 2025",
+    "url": "Blog/how-to-create-unbreakable-password/",
     "category": "Security",
-    "description": "Everything you need to know about creating and managing secure passwords to protect your accounts online.",
-    "tags": ["password", "security", "online safety"],
-    "relatedTools": ["password-generator/"]
+    "readingTime": "6 min read",
+    "date": "2025-07-10",
+    "description": "Learn the science behind strong passwords and how to protect your accounts from hackers using proven security strategies.",
+    "image": "Blog/images/strong-password.jpg",
+    "featured": true
   },
   {
-    "title": "QR Codes Explained: How to Create and Use QR Codes for Free",
-    "url": "Blog/qr-code-guide/",
-    "image": "Blog/images/qr-guide.webp",
-    "date": "2026-07-15",
-    "category": "Generators",
-    "description": "A complete beginner's guide to QR codes — what they are, how they work, and how to generate them for free.",
-    "tags": ["qr code", "generator", "marketing"],
-    "relatedTools": ["qr-code-generator/"]
+    "title": "What is BMI and Why It Matters for Your Health",
+    "url": "Blog/what-is-bmi-and-why-it-matters/",
+    "category": "Health",
+    "readingTime": "5 min read",
+    "date": "2025-07-05",
+    "description": "Understand Body Mass Index, its limitations, and what a healthy BMI range looks like for different body types.",
+    "image": "Blog/images/bmi-health.jpg",
+    "featured": true
+  },
+  {
+    "title": "10 Free Developer Tools You Should Be Using in 2025",
+    "url": "Blog/10-free-developer-tools-2025/",
+    "category": "Developer Tools",
+    "readingTime": "8 min read",
+    "date": "2025-06-28",
+    "description": "Boost your productivity with these 10 essential free developer tools that every programmer should have in their toolkit.",
+    "image": "Blog/images/developer-tools.jpg",
+    "featured": true
+  },
+  {
+    "title": "QR Codes Explained: How They Work and How to Use Them",
+    "url": "Blog/qr-codes-explained/",
+    "category": "Technology",
+    "readingTime": "4 min read",
+    "date": "2025-06-20",
+    "description": "Discover how QR codes store data, the best use cases, and how to generate them for free using online tools.",
+    "image": "Blog/images/qr-codes.jpg",
+    "featured": false
+  },
+  {
+    "title": "The Pomodoro Technique: How 25 Minutes Can Transform Your Productivity",
+    "url": "Blog/pomodoro-technique-productivity/",
+    "category": "Productivity",
+    "readingTime": "5 min read",
+    "date": "2025-06-15",
+    "description": "Learn how the Pomodoro Technique works and how to use it to eliminate distractions and get more done every day.",
+    "image": "Blog/images/pomodoro.jpg",
+    "featured": false
+  },
+  {
+    "title": "SEO Meta Tags Explained: A Complete Beginner's Guide",
+    "url": "Blog/seo-meta-tags-guide/",
+    "category": "SEO",
+    "readingTime": "7 min read",
+    "date": "2025-06-08",
+    "description": "Master meta titles, descriptions, Open Graph, and Twitter Cards with this complete SEO guide for beginners.",
+    "image": "Blog/images/meta-tags.jpg",
+    "featured": false
+  },
+  {
+    "title": "CSS Gradients: A Complete Guide with Examples",
+    "url": "Blog/css-gradients-complete-guide/",
+    "category": "Design",
+    "readingTime": "6 min read",
+    "date": "2025-05-30",
+    "description": "Everything you need to know about CSS linear, radial, and conic gradients, with live examples and best practices.",
+    "image": "Blog/images/css-gradients.jpg",
+    "featured": false
+  },
+  {
+    "title": "How to Convert Images for the Web: PNG vs JPG vs WebP",
+    "url": "Blog/image-formats-png-jpg-webp/",
+    "category": "Design",
+    "readingTime": "4 min read",
+    "date": "2025-05-22",
+    "description": "Choose the right image format for your website to improve loading speed, quality, and Core Web Vitals.",
+    "image": "Blog/images/image-formats.jpg",
+    "featured": false
   }
 ]
-
