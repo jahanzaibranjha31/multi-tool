@@ -166,7 +166,34 @@
       renderOverlayResults(overlayInput.value);
     });
   }
+const tools = [
+  {
+    name: "Spin Wheel",
+    url: "spin-wheel/"
+  },
+  {
+    name: "Password Generator",
+    url: "password-generator/"
+  },
+  {
+    name: "QR Code Generator",
+    url: "qr-code-generator/"
+  },
+  {
+    name: "BMI Calculator",
+    url: "bmi-calculator/"
+  }
+];
 
+const container = document.getElementById("tools-container");
+
+tools.forEach(tool => {
+  container.innerHTML += `
+    <a href="${tool.url}" class="tool-card">
+      ${tool.name}
+    </a>
+  `;
+});
   /* =========================================================
      LIVE FILTER — POPULAR TOOLS GRID
      ========================================================= */
