@@ -1,0 +1,43 @@
+name: Indexing Report
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: "0 0 * * 1"
+
+jobs:
+  indexing-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Generate Indexing Report
+        run: |
+          echo "# Indexing Report" > INDEXING_REPORT.md
+          echo "" >> INDEXING_REPORT.md
+          echo "Generated on: $(date -u)" >> INDEXING_REPORT.md
+          echo "" >> INDEXING_REPORT.md
+
+          echo "## HTML Pages" >> INDEXING_REPORT.md
+          find . -name "index.html" | sort >> INDEXING_REPORT.md
+
+          echo "" >> INDEXING_REPORT.md
+          echo "## XML Files" >> INDEXING_REPORT.md
+          find . -name "*.xml" | sort >> INDEXING_REPORT.md
+
+          echo "" >> INDEXING_REPORT.md
+          echo "## Markdown Blog Posts" >> INDEXING_REPORT.md
+          find . -name "*.md" | sort >> INDEXING_REPORT.md
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: indexing-report
+          path: INDEXING_REPORT.md
