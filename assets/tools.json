@@ -1,0 +1,56 @@
+[
+  {
+    "name": "about",
+    "url": "about/"
+  }
+,
+  {
+    "name": "age calculator",
+    "url": "age-calculator/"
+  }
+,
+  {
+    "name": "ai prompt token estimator",
+    "url": "ai-prompt-token-estimator/"
+  }
+,
+  {
+    "name": "bmi calculator",
+    "url": "bmi-calculator/"
+  }
+,
+  {
+    "name": "contact",
+    "url": "contact/"
+  }
+,
+  {
+    "name": "disclaimer",
+    "url": "disclaimer/"
+  }
+,
+  {
+    "name": "password generator",
+    "url": "password-generator/"
+  }
+,
+  {
+    "name": "privacy policy",
+    "url": "privacy-policy/"
+  }
+,
+  {
+    "name": "qr code generator",
+    "url": "qr-code-generator/"
+  }
+,
+  {
+    "name": "spin wheel",
+    "url": "spin-wheel/"
+  }
+,
+  {
+    "name": "terms",
+    "url": "terms/"
+  }
+]
