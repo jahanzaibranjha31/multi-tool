@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ─── Primary SEO ─────────────────────────────────────────────────────── -->
+  <title>What Are AI Tokens? A Beginner's Guide</title>
+  <meta name="description" content="Learn what AI tokens are, how they work, why they matter for cost and performance, and how to count them before sending prompts to ChatGPT, Claude, or Gemini." />
+  <link rel="canonical" href="https://jahanzaibranjha31.github.io/multi-tools/blog/what-are-ai-tokens-beginners-guide/" />
+
+  <!-- ─── Open Graph ────────────────────────────────────────────────────────  -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="What Are AI Tokens? A Beginner's Guide" />
+  <meta property="og:description" content="Learn what AI tokens are, how they work, why they matter for cost and performance, and how to count them before sending prompts to ChatGPT, Claude, or Gemini." />
+  <meta property="og:url" content="https://jahanzaibranjha31.github.io/multi-tools/blog/what-are-ai-tokens-beginners-guide/" />
+  <meta property="og:site_name" content="Multi-Tools" />
+  <meta property="og:image" content="https://jahanzaibranjha31.github.io/multi-tools/blog/what-are-ai-tokens-beginners-guide/og-cover.png" />
+  <meta property="article:published_time" content="2025-07-27T00:00:00Z" />
+  <meta property="article:author" content="Multi-Tools Editorial Team" />
+
+  <!-- ─── Twitter Card ─────────────────────────────────────────────────────  -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Are AI Tokens? A Beginner's Guide" />
+  <meta name="twitter:description" content="Tokens control how AI models read text. Find out what they are, why they cost money, and how to count yours in seconds." />
+  <meta name="twitter:image" content="https://jahanzaibranjha31.github.io/multi-tools/blog/what-are-ai-tokens-beginners-guide/og-cover.png" />
+
+  <!-- ─── Structured Data ──────────────────────────────────────────────────  -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "What Are AI Tokens? A Beginner's Guide",
+      "description": "Learn what AI tokens are, how they work, why they matter for cost and performance, and how to count them before sending prompts to ChatGPT, Claude, or Gemini.",
+      "image": "https://jahanzaibranjha31.github.io/multi-tools/blog/what-are-ai-tokens-beginners-guide/og-cover.png",
+      "datePublished": "2025-07-27T00:00:00Z",
+      "dateModified": "2025-07-27T00:00:00Z",
+      "author": {
+        "@type": "Organization",
+        "name": "Multi-Tools Editorial Team",
+        "url": "https://jahanzaibranjha31.github.io/multi-tools/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Multi-Tools",
+        "url": "https://jahanzaibranjha31.github.io/multi-tools/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://jahanzaibranjha31.github.io/multi-tools/favicon.ico"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jahanzaibranjha31.github.io/multi-tools/blog/what-are-ai-tokens-beginners-guide/"
+      },
+      "keywords": ["AI tokens","token limit","ChatGPT tokens","LLM tokens","token counting","prompt engineering","tokenization","context window"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is an AI token?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An AI token is a chunk of text — typically a word fragment, full word, or punctuation mark — that a language model processes as a single unit. The model converts all input text into tokens before analyzing it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many tokens is 1,000 words?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Approximately 750 tokens. The common rule of thumb is that 1 token ≈ 0.75 words in English, though this varies by model and language."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do tokens affect API pricing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Most AI providers — including OpenAI, Anthropic, and Google — charge per token used. This includes both your input (prompt) tokens and the model's output (completion) tokens."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens when I exceed a model's token limit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The model cannot process the request. The API returns an error, or older conversation history is dropped to fit the context window. Always check your token count before submitting long prompts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I count tokens before sending a prompt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use a dedicated token estimator like the AI Prompt Token Estimator at https://jahanzaibranjha31.github.io/multi-tools/ai-prompt-token-estimator/ to check your prompt length instantly — no API key required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are tokens the same across all AI models?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Each model uses its own tokenizer (vocabulary). A prompt that uses 300 tokens in GPT-4o may use a slightly different count in Claude 3.5 or Gemini 1.5 Pro."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://jahanzaibranjha31.github.io/multi-tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://jahanzaibranjha31.github.io/multi-tools/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "What Are AI Tokens? A Beginner's Guide",
+          "item": "https://jahanzaibranjha31.github.io/multi-tools/blog/what-are-ai-tokens-beginners-guide/"
+        }
+      ]
+    }
+  ]
+  </script>
+
+  <!-- ─── Styles ────────────────────────────────────────────────────────────  -->
+  <style>
+    /* ── Reset & Base ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg:       #ffffff;
+      --color-surface:  #f8f9fb;
+      --color-border:   #e2e6ea;
+      --color-text:     #1a1d23;
+      --color-muted:    #5c6370;
+      --color-accent:   #2563eb;
+      --color-accent-h: #1d4ed8;
+      --color-tip-bg:   #eff6ff;
+      --color-tip-bdr:  #93c5fd;
+      --color-warn-bg:  #fffbeb;
+      --color-warn-bdr: #fcd34d;
+      --color-success:  #16a34a;
+      --font-sans:      'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-mono:      'Courier New', Courier, monospace;
+      --max-w:          780px;
+      --radius:         10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+
+    /* ── Skip nav ──────────────────────────────────────────────── */
+    .skip-link {
+      position: absolute; top: -60px; left: 16px;
+      background: var(--color-accent); color: #fff;
+      padding: 8px 16px; border-radius: 0 0 var(--radius) var(--radius);
+      font-weight: 600; text-decoration: none; z-index: 100;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── Site header ───────────────────────────────────────────── */
+    .site-header {
+      background: var(--color-accent);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .site-header a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: .3px;
+    }
+    .site-header a:hover { text-decoration: underline; }
+    .site-header .sep { color: rgba(255,255,255,.5); }
+
+    /* ── Breadcrumb ────────────────────────────────────────────── */
+    .breadcrumb {
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      padding: 10px 24px;
+      font-size: .85rem;
+      color: var(--color-muted);
+    }
+    .breadcrumb a { color: var(--color-accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { margin: 0 6px; }
+
+    /* ── Main wrapper ──────────────────────────────────────────── */
+    .wrapper {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Article header ────────────────────────────────────────── */
+    .article-meta {
+      font-size: .85rem;
+      color: var(--color-muted);
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .article-meta .tag {
+      background: var(--color-tip-bg);
+      color: var(--color-accent);
+      border: 1px solid var(--color-tip-bdr);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: .8rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.25rem);
+      line-height: 1.25;
+      color: var(--color-text);
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--color-muted);
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    /* ── Hero image placeholder ────────────────────────────────── */
+    .hero-img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      display: block;
+      margin-bottom: 40px;
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      aspect-ratio: 16/7;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-img-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      gap: 8px;
+    }
+    .hero-img-label svg { width: 56px; height: 56px; opacity: .9; }
+    .hero-img-label span { font-size: 1.1rem; font-weight: 600; letter-spacing: .5px; }
+
+    /* ── Table of Contents ─────────────────────────────────────── */
+    .toc {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+    .toc h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--color-text);
+    }
+    .toc ol {
+      padding-left: 20px;
+      margin: 0;
+    }
+    .toc li { margin-bottom: 6px; }
+    .toc a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-size: .95rem;
+    }
+    .toc a:hover { text-decoration: underline; }
+    .toc ol ol {
+      margin-top: 6px;
+      list-style-type: lower-alpha;
+    }
+
+    /* ── Typography ────────────────────────────────────────────── */
+    h2 {
+      font-size: clamp(1.25rem, 3vw, 1.65rem);
+      margin-top: 52px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--color-border);
+      color: var(--color-text);
+      line-height: 1.3;
+    }
+
+    h3 {
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      margin-top: 36px;
+      margin-bottom: 12px;
+      color: var(--color-text);
+    }
+
+    p { margin-bottom: 18px; }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    a:hover { color: var(--color-accent-h); }
+
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 20px;
+    }
+    li { margin-bottom: 7px; }
+
+    strong { font-weight: 700; }
+    em { font-style: italic; }
+
+    code {
+      font-family: var(--font-mono);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: .9em;
+    }
+
+    /* ── Tables ────────────────────────────────────────────────── */
+    .table-wrap { overflow-x: auto; margin-bottom: 28px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .93rem;
+      min-width: 520px;
+    }
+    th {
+      background: var(--color-accent);
+      color: #fff;
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: var(--color-surface); }
+
+    /* ── Tip / Warning / Note boxes ────────────────────────────── */
+    .box {
+      border-left: 4px solid;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 16px 20px;
+      margin: 28px 0;
+    }
+    .box p:last-child { margin-bottom: 0; }
+    .box-title {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: .95rem;
+    }
+
+    .tip  { background: var(--color-tip-bg);  border-color: var(--color-accent);  }
+    .tip  .box-title { color: var(--color-accent); }
+
+    .warn { background: var(--color-warn-bg); border-color: #d97706; }
+    .warn .box-title { color: #92400e; }
+
+    .note { background: #f0fdf4; border-color: #86efac; }
+    .note .box-title { color: var(--color-success); }
+
+    /* ── CTA Block ─────────────────────────────────────────────── */
+    .cta-block {
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      text-align: center;
+      margin: 56px 0 40px;
+    }
+    .cta-block h2, .cta-block h3 {
+      color: #fff;
+      border: none;
+      margin-top: 0;
+    }
+    .cta-block p { color: rgba(255,255,255,.9); margin-bottom: 24px; }
+    .btn {
+      display: inline-block;
+      background: #fff;
+      color: var(--color-accent);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+      color: var(--color-accent-h);
+      text-decoration: none;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,.8);
+      color: #fff;
+      margin-top: 10px;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.1); color: #fff; }
+
+    /* ── Inline tool promo ─────────────────────────────────────── */
+    .tool-promo {
+      background: var(--color-surface);
+      border: 2px solid var(--color-accent);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 32px 0;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .tool-promo-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .tool-promo-body h4 { margin-bottom: 6px; font-size: 1.05rem; }
+    .tool-promo-body p  { margin-bottom: 10px; font-size: .93rem; }
+    .tool-promo-body a.btn {
+      background: var(--color-accent);
+      color: #fff;
+      padding: 9px 22px;
+      font-size: .9rem;
+    }
+    .tool-promo-body a.btn:hover { color: #fff; background: var(--color-accent-h); }
+
+    /* ── Checklist ─────────────────────────────────────────────── */
+    .checklist { list-style: none; padding: 0; }
+    .checklist li {
+      padding-left: 30px;
+      position: relative;
+      margin-bottom: 9px;
+    }
+    .checklist li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--color-success);
+      font-weight: 700;
+    }
+
+    /* ── FAQ ───────────────────────────────────────────────────── */
+    .faq-item {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .faq-q {
+      width: 100%;
+      background: var(--color-surface);
+      border: none;
+      text-align: left;
+      padding: 16px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: var(--color-text);
+    }
+    .faq-q:hover { background: #edf0f4; }
+    .faq-q[aria-expanded="true"] { border-bottom: 1px solid var(--color-border); }
+    .faq-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      transition: transform .25s;
+      color: var(--color-accent);
+    }
+    .faq-q[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      padding: 16px 20px;
+      font-size: .96rem;
+      display: none;
+      background: #fff;
+    }
+    .faq-a p:last-child { margin-bottom: 0; }
+    .faq-a.open { display: block; }
+
+    /* ── Footer ────────────────────────────────────────────────── */
+    .site-footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: .85rem;
+      color: var(--color-muted);
+    }
+    .site-footer a { color: var(--color-accent); }
+
+    /* ── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .wrapper { padding: 32px 16px 64px; }
+      .tool-promo { flex-direction: column; }
+      .cta-block { padding: 28px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Skip navigation -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header" role="banner">
+    <a href="../../">🛠 Multi-Tools</a>
+    <span class="sep">›</span>
+    <a href="../">Blog</a>
+  </header>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="../../">Home</a>
+    <span aria-hidden="true">›</span>
+    <a href="../">Blog</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">What Are AI Tokens?</span>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <div class="wrapper">
+
+      <!-- Article header -->
+      <header>
+        <div class="article-meta">
+          <span class="tag">AI Basics</span>
+          <time datetime="2025-07-27">July 27, 2025</time>
+          <span>·</span>
+          <span>~12 min read</span>
+        </div>
+
+        <h1>What Are AI Tokens? A Beginner's Complete Guide</h1>
+
+        <p class="subtitle">
+          Every time you send a message to ChatGPT, Claude, or Gemini, the AI doesn't read
+          your words the way you do. It breaks them into <strong>tokens</strong>. Understanding
+          tokens is the single most practical thing you can learn to use AI tools smarter,
+          cheaper, and more effectively.
+        </p>
+      </header>
+
+      <!-- Hero image -->
+      <div class="hero-img" role="img" aria-label="Abstract visualization of text being split into AI tokens, shown as colored word-fragments flowing into a language model">
+        <div class="hero-img-label" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="14" width="18" height="10" rx="3" fill="rgba(255,255,255,.4)"/>
+            <rect x="22" y="14" width="12" height="10" rx="3" fill="rgba(255,255,255,.65)"/>
+            <rect x="36" y="14" width="26" height="10" rx="3" fill="rgba(255,255,255,.4)"/>
+            <rect x="2" y="28" width="28" height="10" rx="3" fill="rgba(255,255,255,.55)"/>
+            <rect x="32" y="28" width="14" height="10" rx="3" fill="rgba(255,255,255,.8)"/>
+            <rect x="48" y="28" width="14" height="10" rx="3" fill="rgba(255,255,255,.4)"/>
+            <rect x="14" y="42" width="36" height="10" rx="3" fill="rgba(255,255,255,.55)"/>
+          </svg>
+          <span>AI Token Visualization</span>
+        </div>
+      </div>
+
+      <!-- Table of Contents -->
+      <nav class="toc" aria-label="Table of contents">
+        <h2>📋 Table of Contents</h2>
+        <ol>
+          <li><a href="#what-are-tokens">What Are AI Tokens?</a></li>
+          <li><a href="#how-tokenization-works">How Tokenization Works</a>
+            <ol>
+              <li><a href="#bpe">Byte-Pair Encoding (BPE)</a></li>
+              <li><a href="#examples">Real-word Token Examples</a></li>
+            </ol>
+          </li>
+          <li><a href="#why-tokens-matter">Why Tokens Matter</a></li>
+          <li><a href="#context-window">The Context Window Explained</a></li>
+          <li><a href="#token-limits">Token Limits by Model (Comparison Table)</a></li>
+          <li><a href="#cost">How Tokens Affect Cost</a></li>
+          <li><a href="#count-tokens">How to Count Your Tokens</a></li>
+          <li><a href="#advantages">Advantages of the Token System</a></li>
+          <li><a href="#disadvantages">Disadvantages of the Token System</a></li>
+          <li><a href="#best-practices">Best Practices for Managing Tokens</a></li>
+          <li><a href="#common-mistakes">Common Token Mistakes to Avoid</a></li>
+          <li><a href="#use-cases">Real-World Use Cases</a></li>
+          <li><a href="#faq">Frequently Asked Questions</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+        </ol>
+      </nav>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="what-are-tokens" aria-labelledby="h2-what-are-tokens">
+        <h2 id="h2-what-are-tokens">1. What Are AI Tokens?</h2>
+
+        <p>
+          An <strong>AI token</strong> is the basic unit of text that a large language model (LLM)
+          processes. Think of it as the alphabet of AI — the building blocks everything else is
+          built from.
+        </p>
+
+        <p>
+          Tokens are <em>not</em> the same as words. Depending on frequency and complexity,
+          a token might be:
+        </p>
+
+        <ul>
+          <li>A full word — <code>cat</code> is one token</li>
+          <li>Part of a word — <code>un</code> and <code>believable</code> might be two tokens</li>
+          <li>A punctuation mark — <code>!</code> is typically one token</li>
+          <li>A space — sometimes included as part of an adjacent token</li>
+          <li>A number — <code>2024</code> may be one or multiple tokens depending on the model</li>
+        </ul>
+
+        <p>
+          When you type a prompt, the AI model converts your entire input — every character —
+          into a sequence of numbered tokens. The model then predicts the next token at a time
+          to generate its response. It never sees "words." It sees numbers.
+        </p>
+
+        <div class="box tip">
+          <p class="box-title">💡 Quick mental model</p>
+          <p>
+            Imagine tokens as LEGO bricks. Language is assembled from these standardized pieces.
+            Some bricks represent whole words; others represent syllables or punctuation.
+            The model builds and reads every sentence as a chain of these bricks.
+          </p>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="how-tokenization-works" aria-labelledby="h2-tokenization">
+        <h2 id="h2-tokenization">2. How Tokenization Works</h2>
+
+        <p>
+          Tokenization is the process of converting raw text into tokens. It happens automatically
+          before any text reaches the model's "brain." Different models use different tokenizers,
+          so the same sentence may produce a different token count in GPT-4o versus Claude 3.5 Sonnet.
+        </p>
+
+        <h3 id="bpe">Byte-Pair Encoding (BPE)</h3>
+
+        <p>
+          The most common method is called <strong>Byte-Pair Encoding (BPE)</strong>, originally
+          developed for data compression. The core idea is simple: frequently occurring pairs of
+          characters get merged into a single token.
+        </p>
+
+        <p>Here's how it works in brief:</p>
+
+        <ol>
+          <li>Start with individual characters as separate tokens.</li>
+          <li>Identify the most frequently occurring pair of adjacent tokens in a training corpus.</li>
+          <li>Merge that pair into a new single token.</li>
+          <li>Repeat until you reach the desired vocabulary size (often 50,000–100,000 tokens).</li>
+        </ol>
+
+        <p>
+          The result is a vocabulary of common words, word fragments, and individual characters.
+          Common English words like "the" or "is" get their own single token. Rare or technical
+          words get broken into fragments.
+        </p>
+
+        <h3 id="examples">Real-word Token Examples</h3>
+
+        <p>
+          Here are realistic approximations of how text splits into tokens (using OpenAI's
+          GPT-based tokenizer as a reference):
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Text</th>
+                <th>Approximate Tokens</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Hello</code></td>
+                <td>1</td>
+                <td>Common word → single token</td>
+              </tr>
+              <tr>
+                <td><code>Hello, world!</code></td>
+                <td>4</td>
+                <td>Hello / , / world / !</td>
+              </tr>
+              <tr>
+                <td><code>tokenization</code></td>
+                <td>3</td>
+                <td>token / ization or token / iz / ation</td>
+              </tr>
+              <tr>
+                <td><code>ChatGPT</code></td>
+                <td>3</td>
+                <td>Chat / G / PT</td>
+              </tr>
+              <tr>
+                <td><code>2024</code></td>
+                <td>1–2</td>
+                <td>Varies by model; digits sometimes split</td>
+              </tr>
+              <tr>
+                <td><code>unhelpful</code></td>
+                <td>3</td>
+                <td>un / help / ful</td>
+              </tr>
+              <tr>
+                <td><code>   </code> (3 spaces)</td>
+                <td>1–3</td>
+                <td>Whitespace counts as tokens</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box warn">
+          <p class="box-title">⚠️ Important</p>
+          <p>
+            Non-English languages — Chinese, Arabic, Korean — often use <em>more</em> tokens
+            per word than English because their characters are less common in training data.
+            Always measure your actual prompts rather than guessing.
+          </p>
+        </div>
+      </section>
+
+      <!-- Inline tool promo 1 -->
+      <div class="tool-promo" role="complementary" aria-label="Related tool recommendation">
+        <div class="tool-promo-icon" aria-hidden="true">🔢</div>
+        <div class="tool-promo-body">
+          <h4>Check Your Token Count Instantly</h4>
+          <p>
+            Not sure how many tokens your prompt uses? Paste your text into the free
+            <strong>AI Prompt Token Estimator</strong> and get an instant count — no account,
+            no API key required.
+          </p>
+          <a class="btn" href="../../ai-prompt-token-estimator/" rel="noopener">
+            Try the Token Estimator →
+          </a>
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="why-tokens-matter" aria-labelledby="h2-why">
+        <h2 id="h2-why">3. Why Tokens Matter</h2>
+
+        <p>Tokens affect your AI experience in three direct ways:</p>
+
+        <ul>
+          <li>
+            <strong>Cost.</strong> AI APIs charge per token — both input (what you send) and
+            output (what you receive). More tokens = higher bill.
+          </li>
+          <li>
+            <strong>Speed.</strong> Models generate one token at a time. Longer outputs
+            take proportionally longer to arrive.
+          </li>
+          <li>
+            <strong>Memory.</strong> A model can only "see" a fixed number of tokens at once —
+            called its <em>context window</em>. Go over that limit and something gets cut off.
+          </li>
+        </ul>
+
+        <p>
+          Whether you use AI through a consumer interface like ChatGPT or through an API for a
+          production application, understanding tokens helps you get better results, avoid errors,
+          and spend less money.
+        </p>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="context-window" aria-labelledby="h2-context">
+        <h2 id="h2-context">4. The Context Window Explained</h2>
+
+        <p>
+          The <strong>context window</strong> is the maximum number of tokens a model can
+          process in a single conversation turn — input plus output combined.
+        </p>
+
+        <p>
+          Picture the context window as a whiteboard. Everything currently written on the
+          whiteboard is what the AI can "see" and think about. If the whiteboard fills up,
+          you have to erase older writing to make room for new content. That erased content
+          is gone — the model can no longer reference it.
+        </p>
+
+        <p>This has real consequences:</p>
+
+        <ul>
+          <li>Long documents pasted into the chat may get truncated.</li>
+          <li>In long conversations, the AI may "forget" what you said at the beginning.</li>
+          <li>Complex system prompts eat into the available space for your actual request.</li>
+        </ul>
+
+        <div class="box note">
+          <p class="box-title">✅ Good to know</p>
+          <p>
+            Context windows have grown dramatically. Early GPT-3 had 4,096 tokens.
+            Modern models like GPT-4o support 128,000 tokens, and Gemini 1.5 Pro
+            reaches 1,000,000 tokens — enough for entire books.
+          </p>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="token-limits" aria-labelledby="h2-limits">
+        <h2 id="h2-limits">5. Token Limits by Model (Comparison Table)</h2>
+
+        <p>
+          Here's how the major AI models compare in terms of context window size as of mid-2025.
+          Always check the official provider documentation for the latest figures.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Provider</th>
+                <th>Max Context Window</th>
+                <th>Max Output Tokens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>GPT-4o</td>
+                <td>OpenAI</td>
+                <td>128,000 tokens</td>
+                <td>16,384 tokens</td>
+              </tr>
+              <tr>
+                <td>GPT-4o mini</td>
+                <td>OpenAI</td>
+                <td>128,000 tokens</td>
+                <td>16,384 tokens</td>
+              </tr>
+              <tr>
+                <td>Claude 3.5 Sonnet</td>
+                <td>Anthropic</td>
+                <td>200,000 tokens</td>
+                <td>8,192 tokens</td>
+              </tr>
+              <tr>
+                <td>Claude 3 Opus</td>
+                <td>Anthropic</td>
+                <td>200,000 tokens</td>
+                <td>4,096 tokens</td>
+              </tr>
+              <tr>
+                <td>Gemini 1.5 Pro</td>
+                <td>Google</td>
+                <td>1,000,000 tokens</td>
+                <td>8,192 tokens</td>
+              </tr>
+              <tr>
+                <td>Gemini 1.5 Flash</td>
+                <td>Google</td>
+                <td>1,000,000 tokens</td>
+                <td>8,192 tokens</td>
+              </tr>
+              <tr>
+                <td>Llama 3 (70B)</td>
+                <td>Meta (via providers)</td>
+                <td>8,192 tokens</td>
+                <td>4,096 tokens</td>
+              </tr>
+              <tr>
+                <td>Mistral Large</td>
+                <td>Mistral AI</td>
+                <td>32,768 tokens</td>
+                <td>8,192 tokens</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          <em>Sources: <a href="https://platform.openai.com/docs/models" target="_blank" rel="noopener noreferrer">OpenAI Models documentation</a>,
+          <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener noreferrer">Anthropic Claude models</a>,
+          <a href="https://ai.google.dev/gemini-api/docs/models/gemini" target="_blank" rel="noopener noreferrer">Google Gemini API docs</a>.</em>
+        </p>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="cost" aria-labelledby="h2-cost">
+        <h2 id="h2-cost">6. How Tokens Affect Cost</h2>
+
+        <p>
+          If you access AI models through an API — whether for personal projects or business
+          applications — you pay for every token your request processes. Providers typically
+          price input and output tokens separately, with output tokens usually costing more.
+        </p>
+
+        <h3>How pricing works</h3>
+
+        <p>
+          Prices are expressed per 1 million tokens (or sometimes per 1,000 tokens in older
+          documentation). Here's a simplified example to illustrate the math:
+        </p>
+
+        <ul>
+          <li>You send a 500-token prompt → <strong>input cost</strong></li>
+          <li>The model returns a 1,000-token response → <strong>output cost</strong></li>
+          <li>Total: 1,500 tokens billed per API call</li>
+        </ul>
+
+        <p>
+          For high-volume applications — chatbots, document processing pipelines, automated
+          summaries — this adds up quickly. A system processing 10,000 documents per day, each
+          with 2,000 tokens in and 500 out, uses 25 million tokens daily.
+        </p>
+
+        <div class="box tip">
+          <p class="box-title">💡 Cost-saving tip</p>
+          <p>
+            Before sending any large prompt to a paid API, estimate the token count first.
+            Our free <a href="../../ai-prompt-token-estimator/">AI Prompt Token Estimator</a>
+            lets you paste your text and check the count in seconds — preventing expensive surprises.
+          </p>
+        </div>
+
+        <h3>Input vs. output tokens</h3>
+
+        <p>
+          A common misconception is that only the AI's response costs tokens. In reality,
+          <strong>everything you send</strong> counts too — your system prompt, conversation history,
+          and user message are all billed as input tokens.
+        </p>
+
+        <p>
+          In long multi-turn conversations, the entire conversation history is typically re-sent
+          with every message. That means a 100-message conversation may cost far more per message
+          near the end than at the beginning.
+        </p>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="count-tokens" aria-labelledby="h2-count">
+        <h2 id="h2-count">7. How to Count Your Tokens</h2>
+
+        <p>There are several ways to count tokens before or after sending a prompt.</p>
+
+        <h3>Option 1: Use an online token estimator (recommended for most users)</h3>
+
+        <p>
+          The simplest approach is a dedicated tool. You paste your text, and it instantly
+          shows the estimated token count for popular models. No setup, no API key.
+        </p>
+
+        <div class="tool-promo" role="complementary" aria-label="AI Prompt Token Estimator tool">
+          <div class="tool-promo-icon" aria-hidden="true">⚡</div>
+          <div class="tool-promo-body">
+            <h4>AI Prompt Token Estimator</h4>
+            <p>
+              Paste any text and instantly see the token count estimated for models like GPT-4,
+              Claude, and Gemini. Free, fast, and requires no login.
+            </p>
+            <a class="btn" href="../../ai-prompt-token-estimator/" rel="noopener">
+              Count My Tokens →
+            </a>
+          </div>
+        </div>
+
+        <h3>Option 2: OpenAI's Tokenizer (for GPT models)</h3>
+
+        <p>
+          OpenAI provides an official tokenizer tool called
+          <a href="https://platform.openai.com/tokenizer" target="_blank" rel="noopener noreferrer">platform.openai.com/tokenizer</a>
+          that shows exactly how text splits into tokens with color-coded blocks.
+          It also uses the <code>tiktoken</code> library under the hood — which you can
+          install and run in Python for programmatic use.
+        </p>
+
+        <h3>Option 3: Use the <code>tiktoken</code> library in Python</h3>
+
+        <p>For developers integrating directly with the OpenAI API:</p>
+
+        <pre style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius);padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:.88rem;line-height:1.7;margin-bottom:20px;"><code>import tiktoken
+
+encoder = tiktoken.encoding_for_model("gpt-4o")
+text = "Hello, how many tokens is this?"
+tokens = encoder.encode(text)
+print(len(tokens))  # Output: 8</code></pre>
+
+        <h3>Option 4: Anthropic's token counting API</h3>
+
+        <p>
+          Anthropic offers a dedicated
+          <a href="https://docs.anthropic.com/en/docs/build-with-claude/token-counting" target="_blank" rel="noopener noreferrer">token counting endpoint</a>
+          for Claude models that returns an exact token count for any given message without
+          generating a response.
+        </p>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="advantages" aria-labelledby="h2-advantages">
+        <h2 id="h2-advantages">8. Advantages of the Token System</h2>
+
+        <p>
+          The token-based approach to language modeling is not arbitrary. It offers meaningful
+          technical advantages:
+        </p>
+
+        <ul class="checklist">
+          <li>
+            <strong>Fixed vocabulary size.</strong> By representing any text as combinations
+            of a finite set of tokens, models avoid the need for an infinitely large word dictionary.
+          </li>
+          <li>
+            <strong>Handles new words gracefully.</strong> Unknown words are decomposed into
+            recognizable sub-word pieces, so the model never truly sees an "unknown" input.
+          </li>
+          <li>
+            <strong>Multilingual support.</strong> The same vocabulary can represent many
+            languages through character-level fallbacks, without requiring separate models per language.
+          </li>
+          <li>
+            <strong>Computational efficiency.</strong> Tokens map to integer IDs, making
+            mathematical operations (matrix multiplications inside the model) fast on GPUs.
+          </li>
+          <li>
+            <strong>Consistent billing.</strong> Charging per token is more granular and
+            fairer than charging per word or per request, which would be impossible to standardize.
+          </li>
+          <li>
+            <strong>Scalable context management.</strong> The context window can be precisely
+            defined in tokens — a clean, measurable boundary the system can enforce reliably.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="disadvantages" aria-labelledby="h2-disadvantages">
+        <h2 id="h2-disadvantages">9. Disadvantages of the Token System</h2>
+
+        <p>Like any design choice, the token system also has real drawbacks:</p>
+
+        <ul>
+          <li>
+            <strong>Non-English text is penalized.</strong> Languages with large character sets
+            (Chinese, Japanese, Arabic) consume more tokens per semantic unit than English,
+            making API usage more expensive for non-English users.
+          </li>
+          <li>
+            <strong>Context window constraints are real.</strong> Even large context windows
+            eventually truncate long documents, forcing developers to chunk data and manage
+            retrieval manually.
+          </li>
+          <li>
+            <strong>Token counts can surprise you.</strong> Code, JSON, and structured data
+            often use far more tokens than equivalent natural language. A 200-line JSON payload
+            may consume thousands of tokens.
+          </li>
+          <li>
+            <strong>Tokenizer differences create inconsistency.</strong> Different models use
+            different tokenizers. A count from one tool may not match another model exactly.
+          </li>
+          <li>
+            <strong>Opaque to end users.</strong> Most consumer-facing AI interfaces hide
+            token usage, making it hard to understand why something failed or why a response
+            was cut short.
+          </li>
+          <li>
+            <strong>Whitespace and formatting inflate counts.</strong> Extra spaces, markdown
+            syntax, and repeated formatting all cost tokens, even if they add little informational value.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="best-practices" aria-labelledby="h2-best">
+        <h2 id="h2-best">10. Best Practices for Managing Tokens</h2>
+
+        <h3>Write concise prompts</h3>
+        <p>
+          Every unnecessary word is a token you're paying for. Trim filler phrases like
+          "Please could you kindly" and replace them with direct instructions like "Write" or "List."
+        </p>
+
+        <h3>Compress context intelligently</h3>
+        <p>
+          Instead of pasting an entire document, summarize the relevant sections first. Ask the AI
+          to extract key facts from a long source, then use those facts in follow-up prompts.
+        </p>
+
+        <h3>Set a max output token limit</h3>
+        <p>
+          Most APIs let you specify a <code>max_tokens</code> parameter for the response.
+          Setting a reasonable limit prevents unexpectedly long (and expensive) outputs.
+        </p>
+
+        <h3>Use system prompts wisely</h3>
+        <p>
+          System prompts are re-sent on every API call. A bloated 2,000-token system prompt
+          costs 2,000 input tokens per message. Audit your system prompts regularly and keep
+          them focused.
+        </p>
+
+        <h3>Chunk large documents</h3>
+        <p>
+          When processing documents that exceed the context window, split them into overlapping
+          chunks. Process each chunk separately and combine results programmatically.
+        </p>
+
+        <h3>Check token count before sending</h3>
+        <p>
+          Make it a habit to estimate your prompt's token count before submitting — especially
+          for large inputs. Use the
+          <a href="../../ai-prompt-token-estimator/">AI Prompt Token Estimator</a> for a fast,
+          free check before you hit send.
+        </p>
+
+        <div class="box tip">
+          <p class="box-title">💡 Pro tip: Model selection affects cost</p>
+          <p>
+            GPT-4o mini and Gemini Flash are dramatically cheaper per token than their flagship
+            counterparts, while still performing well on most everyday tasks. Test whether a
+            smaller model meets your needs before defaulting to the most powerful — and expensive — option.
+          </p>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="common-mistakes" aria-labelledby="h2-mistakes">
+        <h2 id="h2-mistakes">11. Common Token Mistakes to Avoid</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Mistake</th>
+                <th>Why It's a Problem</th>
+                <th>Fix</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Pasting entire documents without trimming</td>
+                <td>Wastes tokens on irrelevant content; may exceed the context window</td>
+                <td>Extract only the relevant sections before sending</td>
+              </tr>
+              <tr>
+                <td>Not checking token count before API calls</td>
+                <td>Unexpected errors or truncated responses</td>
+                <td>Use a <a href="../../ai-prompt-token-estimator/">token estimator</a> first</td>
+              </tr>
+              <tr>
+                <td>Forgetting conversation history accumulates tokens</td>
+                <td>Long chats become expensive and may hit context limits</td>
+                <td>Summarize or reset context periodically</td>
+              </tr>
+              <tr>
+                <td>Using verbose system prompts</td>
+                <td>Same tokens re-billed every call</td>
+                <td>Keep system prompts short and specific</td>
+              </tr>
+              <tr>
+                <td>Assuming token count equals word count</td>
+                <td>Underestimates actual usage, leading to budget overruns</td>
+                <td>Measure using an actual tokenizer, not a word counter</td>
+              </tr>
+              <tr>
+                <td>Ignoring output tokens in cost calculations</td>
+                <td>Output is often billed at a higher rate than input</td>
+                <td>Account for both input and output in your cost estimates</td>
+              </tr>
+              <tr>
+                <td>Copy-pasting structured data (JSON, XML) directly</td>
+                <td>Structured formats are token-heavy; brackets and keys add up fast</td>
+                <td>Simplify data structures or extract only the needed fields</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="use-cases" aria-labelledby="h2-usecases">
+        <h2 id="h2-usecases">12. Real-World Use Cases</h2>
+
+        <h3>Content creators and writers</h3>
+        <p>
+          If you use AI to draft articles, social posts, or email campaigns, tracking tokens
+          helps you understand why some responses get cut short and how to structure prompts
+          that reliably produce complete outputs within the model's limits.
+        </p>
+
+        <h3>Developers building AI applications</h3>
+        <p>
+          Every chatbot, document processor, or AI-powered feature in a product makes API calls.
+          Managing token usage is fundamental to cost control. A small optimization — reducing
+          the average prompt size by 20% — can cut monthly API bills significantly at scale.
+        </p>
+
+        <h3>Students and researchers</h3>
+        <p>
+          Uploading research papers or textbook chapters for summarization or analysis is common.
+          Knowing token limits prevents the frustrating experience of submitting a long PDF only
+          for the model to silently truncate it mid-document.
+        </p>
+
+        <h3>Customer support teams</h3>
+        <p>
+          AI-powered support tools often include a long system prompt (defining the persona,
+          policies, and knowledge base), a conversation history, and the user's latest message —
+          all counting toward the same context window. Token awareness helps teams design
+          efficient support bots that don't fail mid-conversation.
+        </p>
+
+        <h3>Legal and financial professionals</h3>
+        <p>
+          Reviewing contracts or financial reports with AI requires understanding that a
+          100-page document likely exceeds most context windows and needs to be chunked.
+          Token counting tools help plan this correctly before processing.
+        </p>
+
+        <h3>Educators designing AI-assisted lessons</h3>
+        <p>
+          Teachers using AI tutoring tools benefit from understanding that the AI's "memory"
+          within a session is finite. Designing lesson flows that respect this constraint
+          produces more reliable, consistent student experiences.
+        </p>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="faq" aria-labelledby="h2-faq">
+        <h2 id="h2-faq">13. Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+            What is an AI token?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1">
+            <p>
+              An AI token is a chunk of text — typically a word fragment, full word, or
+              punctuation mark — that a language model processes as a single unit. The model
+              converts all input text into tokens before analyzing it.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+            How many tokens is 1,000 words?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2">
+            <p>
+              Approximately 750 tokens for standard English text. The common rule of thumb is
+              that 1 token ≈ 0.75 words, though this varies by model and language. Code and
+              structured data typically require more tokens per "word" than natural language.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+            Do tokens affect API pricing?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3">
+            <p>
+              Yes. Most AI providers — including OpenAI, Anthropic, and Google — charge per
+              token used. This includes both your input (prompt) tokens and the model's output
+              (completion) tokens. Output tokens are often priced higher than input tokens.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+            What happens when I exceed a model's token limit?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4">
+            <p>
+              The model cannot process a request larger than its context window. The API
+              typically returns an error. In some chat interfaces, older parts of the
+              conversation are automatically dropped to make room — meaning the model effectively
+              "forgets" earlier context. Always check your token count before submitting
+              large prompts.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+            How can I count tokens before sending a prompt?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5">
+            <p>
+              Use a dedicated token estimator. The free
+              <a href="../../ai-prompt-token-estimator/">AI Prompt Token Estimator</a>
+              lets you paste any text and see the estimated count instantly —
+              no account or API key required.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
+            Are tokens the same across all AI models?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" id="faq-a6" role="region" aria-labelledby="faq-q6">
+            <p>
+              No. Each model uses its own tokenizer with its own vocabulary. A prompt that
+              uses 300 tokens in GPT-4o may produce a slightly different count in Claude 3.5
+              or Gemini 1.5 Pro. For precise counts, always use the tokenizer matching
+              your target model.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a7" id="faq-q7">
+            Does ChatGPT show me the token count?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" id="faq-a7" role="region" aria-labelledby="faq-q7">
+            <p>
+              The standard ChatGPT web interface does not display token counts. Developers
+              using the API receive token usage in every response object. For casual users,
+              an external estimator like our
+              <a href="../../ai-prompt-token-estimator/">AI Prompt Token Estimator</a>
+              is the easiest way to check.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="faq-a8" id="faq-q8">
+            How do I reduce my token usage without losing quality?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" id="faq-a8" role="region" aria-labelledby="faq-q8">
+            <p>
+              Focus on clarity over length. Remove polite filler, unnecessary context,
+              and repeated instructions. Use bullet-point formats instead of paragraphs
+              where possible — they convey the same information in fewer tokens.
+              Summarize large source material before including it in a prompt.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <section id="conclusion" aria-labelledby="h2-conclusion">
+        <h2 id="h2-conclusion">14. Conclusion</h2>
+
+        <p>
+          AI tokens are the invisible currency of every interaction you have with a language model.
+          They determine what the model can see, how long it can think, how much you pay, and
+          how fast you get a response.
+        </p>
+
+        <p>
+          You don't need to memorize tokenizer algorithms to use AI effectively. But understanding
+          a few core ideas — that tokens aren't words, that context windows are finite, and that
+          every character has a cost — puts you in control of your AI interactions rather than
+          being at the mercy of them.
+        </p>
+
+        <p>Here's what to take away:</p>
+
+        <ul class="checklist">
+          <li>Tokens are sub-word units used by AI to process text</li>
+          <li>~1 token ≈ 0.75 English words (varies by language and model)</li>
+          <li>Context windows define how much the model can "see" at once</li>
+          <li>Both input and output tokens are billed by API providers</li>
+          <li>Always estimate your token count before sending large prompts</li>
+          <li>Concise, well-structured prompts save money and improve results</li>
+        </ul>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────── -->
+      <!-- Primary CTA -->
+      <div class="cta-block" role="complementary" aria-label="Try the AI Prompt Token Estimator">
+        <h2>Count Your Tokens — Free, Instant, No Login</h2>
+        <p>
+          Before your next AI prompt, take 10 seconds to check the token count.
+          Avoid context errors, control your costs, and send smarter prompts every time.
+        </p>
+        <a class="btn" href="../../ai-prompt-token-estimator/" rel="noopener">
+          🔢 Open the AI Prompt Token Estimator
+        </a>
+      </div>
+
+      <!-- Secondary tool links -->
+      <section aria-labelledby="more-tools-heading">
+        <h2 id="more-tools-heading" style="margin-top:0">Explore More Free AI Tools</h2>
+        <p>While you're here, check out other free tools in the Multi-Tools collection:</p>
+        <ul>
+          <li><a href="../../ai-prompt-token-estimator/">AI Prompt Token Estimator</a> — Estimate token counts for any text</li>
+          <li><a href="../../">Browse all tools</a> — See the full collection</li>
+        </ul>
+      </section>
+
+      <!-- Authoritative references -->
+      <section aria-labelledby="refs-heading">
+        <h2 id="refs-heading">Authoritative References</h2>
+        <ul>
+          <li>
+            <a href="https://platform.openai.com/docs/concepts/tokens" target="_blank" rel="noopener noreferrer">
+              OpenAI — What are tokens?
+            </a> — Official OpenAI documentation on tokens and tokenization.
+          </li>
+          <li>
+            <a href="https://platform.openai.com/docs/models" target="_blank" rel="noopener noreferrer">
+              OpenAI — Models overview
+            </a> — Context window and token limit specifications for OpenAI models.
+          </li>
+          <li>
+            <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener noreferrer">
+              Anthropic — Claude model specifications
+            </a> — Official Claude context window and pricing details.
+          </li>
+          <li>
+            <a href="https://ai.google.dev/gemini-api/docs/models/gemini" target="_blank" rel="noopener noreferrer">
+              Google — Gemini API model details
+            </a> — Official Gemini model specifications including context window sizes.
+          </li>
+          <li>
+            <a href="https://github.com/openai/tiktoken" target="_blank" rel="noopener noreferrer">
+              OpenAI tiktoken (GitHub)
+            </a> — The open-source tokenizer library used by GPT models.
+          </li>
+          <li>
+            <a href="https://docs.anthropic.com/en/docs/build-with-claude/token-counting" target="_blank" rel="noopener noreferrer">
+              Anthropic — Token counting API
+            </a> — Official documentation for counting tokens in Claude requests.
+          </li>
+        </ul>
+      </section>
+
+    </div><!-- /.wrapper -->
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <p>
+      &copy; 2025 <a href="../../">Multi-Tools</a> · Free online tools for everyone ·
+      <a href="../">Blog</a>
+    </p>
+  </footer>
+
+  <!-- Vanilla JavaScript: FAQ accordion -->
+  <script>
+    (function () {
+      'use strict';
+
+      var buttons = document.querySelectorAll('.faq-q');
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var expanded = this.getAttribute('aria-expanded') === 'true';
+          var answerId = this.getAttribute('aria-controls');
+          var answer   = document.getElementById(answerId);
+
+          // Close all others
+          buttons.forEach(function (other) {
+            if (other !== btn) {
+              other.setAttribute('aria-expanded', 'false');
+              var otherId = other.getAttribute('aria-controls');
+              var otherA  = document.getElementById(otherId);
+              if (otherA) otherA.classList.remove('open');
+            }
+          });
+
+          // Toggle current
+          this.setAttribute('aria-expanded', String(!expanded));
+          if (answer) answer.classList.toggle('open', !expanded);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
+
