@@ -1,0 +1,83 @@
+
+name: Build Search Index
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-search-index:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate search-index.json
+        run: |
+          python << 'PY'
+          import os
+          import json
+          from html.parser import HTMLParser
+
+          ROOT = '.'
+
+          class TextExtractor(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.text = []
+
+              def handle_data(self, data):
+                  text = data.strip()
+                  if text:
+                      self.text.append(text)
+
+          pages = []
+
+          for root, dirs, files in os.walk(ROOT):
+              if '.git' in root or '.github' in root:
+                  continue
+
+              if 'index.html' in files:
+                  path = os.path.join(root, 'index.html')
+
+                  with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+                      html = f.read()
+
+                  parser = TextExtractor()
+                  parser.feed(html)
+
+                  content = ' '.join(parser.text)
+
+                  title = 'Untitled'
+                  if '<title>' in html and '</title>' in html:
+                      title = html.split('<title>')[1].split('</title>')[0].strip()
+
+                  rel = os.path.relpath(root, ROOT)
+
+                  if rel == '.':
+                      url = './'
+                  else:
+                      url = rel.replace('\\\\', '/') + '/'
+
+                  pages.append({
+                      'title': title,
+                      'url': url,
+                      'content': content[:5000]
+                  })
+
+          with open('search-index.json', 'w', encoding='utf-8') as f:
+              json.dump(pages, f, ensure_ascii=False, indent=2)
+
+          print(f'Generated search-index.json with {len(pages)} pages')
+          PY
+
+      - name: Commit search index
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: update search index'
+          file_pattern: search-index.json
