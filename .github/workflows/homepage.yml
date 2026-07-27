@@ -1,28 +1,37 @@
-name: Update Homepage
+name: Auto Update Homepage
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+
+    paths:
+      - "**"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   homepage:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Generate homepage
-        run: node scripts/generate-homepage.js
-
-      - name: Commit changes
+      - name: Generate Homepage
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add index.html
-          git diff --cached --quiet || git commit -m "Update homepage"
-          git push
+          node scripts/generate-homepage.js
+
+      - name: Commit Updated Homepage
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto update homepage"
+          file_pattern: index.html
