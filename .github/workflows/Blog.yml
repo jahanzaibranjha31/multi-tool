@@ -1,0 +1,37 @@
+name: Update Blog Index
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update-blog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate Blog Index
+        run: node scripts/generate-blog.js
+
+      - name: Commit Changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add Blog/index.html
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto update Blog index"
+            git push
+          fi
