@@ -1,0 +1,50 @@
+name: SEO Keyword Report
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  keyword-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Generate SEO Keyword Report
+        run: |
+          mkdir -p reports
+
+          echo "# SEO Keyword Report" > reports/keyword-report.md
+          echo "" >> reports/keyword-report.md
+          echo "Generated: $(date -u)" >> reports/keyword-report.md
+          echo "" >> reports/keyword-report.md
+
+          echo "## HTML Pages" >> reports/keyword-report.md
+          find . -name "*.html" >> reports/keyword-report.md
+
+          echo "" >> reports/keyword-report.md
+          echo "## Page Titles" >> reports/keyword-report.md
+          grep -R "<title>" . --include="*.html" >> reports/keyword-report.md || true
+
+          echo "" >> reports/keyword-report.md
+          echo "## Meta Descriptions" >> reports/keyword-report.md
+          grep -R 'meta name="description"' . --include="*.html" >> reports/keyword-report.md || true
+
+          echo "" >> reports/keyword-report.md
+          echo "## H1 Headings" >> reports/keyword-report.md
+          grep -R "<h1" . --include="*.html" >> reports/keyword-report.md || true
+
+          echo "" >> reports/keyword-report.md
+          echo "## Canonical URLs" >> reports/keyword-report.md
+          grep -R 'rel="canonical"' . --include="*.html" >> reports/keyword-report.md || true
+
+      - name: Upload Keyword Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: keyword-report
+          path: reports/keyword-report.md
