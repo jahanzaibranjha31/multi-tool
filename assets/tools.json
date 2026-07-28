@@ -15,6 +15,11 @@
   }
 ,
   {
+    "name": "all tools",
+    "url": "all-tools/"
+  }
+,
+  {
     "name": "bmi calculator",
     "url": "bmi-calculator/"
   }
