@@ -1,0 +1,57 @@
+name: Generate Blog
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "blog.json"
+      - "Blog/**"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  validate-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate blog.json
+        run: |
+          python3 -c "
+          import json, sys
+          with open('blog.json') as f:
+              data = json.load(f)
+          posts = data.get('posts', [])
+          if not posts:
+              sys.exit('blog.json has no posts')
+          required = ['title', 'url', 'description', 'datePublished']
+          for post in posts:
+              missing = [k for k in required if not post.get(k)]
+              if missing:
+                  sys.exit(f\"Post '{post.get('title','?')}' missing fields: {missing}\")
+          print(f'blog.json OK — {len(posts)} post(s) validated.')
+          "
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
