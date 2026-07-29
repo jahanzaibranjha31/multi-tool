@@ -25,6 +25,11 @@
   }
 ,
   {
+    "name": "base64 encoder decoder",
+    "url": "base64-encoder-decoder/"
+  }
+,
+  {
     "name": "bmi calculator",
     "url": "bmi-calculator/"
   }
@@ -42,6 +47,11 @@
   {
     "name": "disclaimer",
     "url": "disclaimer/"
+  }
+,
+  {
+    "name": "json formatter",
+    "url": "json-formatter/"
   }
 ,
   {
