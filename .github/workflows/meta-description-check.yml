@@ -1,0 +1,97 @@
+name: Meta Description Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  meta-description-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check Meta Descriptions
+        run: |
+          node <<'EOF'
+          const fs = require("fs");
+          const path = require("path");
+
+          const htmlFiles = [];
+
+          function walk(dir) {
+            for (const file of fs.readdirSync(dir)) {
+              if (
+                file === "node_modules" ||
+                file === ".git" ||
+                file === ".github"
+              ) continue;
+
+              const full = path.join(dir, file);
+
+              if (fs.statSync(full).isDirectory()) {
+                walk(full);
+              } else if (file.endsWith(".html")) {
+                htmlFiles.push(full);
+              }
+            }
+          }
+
+          walk(".");
+
+          let failed = false;
+          const descriptions = {};
+
+          for (const file of htmlFiles) {
+
+            const html = fs.readFileSync(file, "utf8");
+
+            const match = html.match(
+              /<meta\s+name=["']description["']\s+content=["']([^"]+)["']/i
+            );
+
+            if (!match) {
+              console.error(`❌ Missing meta description: ${file}`);
+              failed = true;
+              continue;
+            }
+
+            const description = match[1].trim();
+
+            if (description.length < 120 || description.length > 160) {
+              console.warn(
+                `⚠ ${file} description length is ${description.length} characters (recommended 120–160).`
+              );
+            }
+
+            if (descriptions[description]) {
+              console.error(
+                `❌ Duplicate meta description:\n${descriptions[description]}\n${file}`
+              );
+              failed = true;
+            } else {
+              descriptions[description] = file;
+            }
+          }
+
+          if (failed) {
+            console.error("\nMeta description validation failed.");
+            process.exit(1);
+          }
+
+          console.log("\n✅ All meta descriptions passed.");
+          EOF
