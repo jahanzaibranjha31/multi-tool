@@ -35,6 +35,11 @@
   }
 ,
   {
+    "name": "currency converter",
+    "url": "currency-converter/"
+  }
+,
+  {
     "name": "disclaimer",
     "url": "disclaimer/"
   }
