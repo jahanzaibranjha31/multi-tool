@@ -1,0 +1,67 @@
+name: Remove Unused Assets
+
+on:
+  schedule:
+    - cron: '0 3 * * 0'   # Every Sunday at 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Find unused assets
+        run: |
+          python3 <<'PY'
+          import os, re
+
+          exts = ('.png','.jpg','.jpeg','.gif','.svg','.webp','.ico','.css','.js')
+          ignore_dirs = {'.git','node_modules','.github'}
+
+          files = []
+          for root, dirs, fs in os.walk('.'):
+              dirs[:] = [d for d in dirs if d not in ignore_dirs]
+              for f in fs:
+                  path = os.path.join(root, f)
+                  if path.endswith(exts):
+                      files.append(path)
+
+          refs = ''
+          for root, dirs, fs in os.walk('.'):
+              dirs[:] = [d for d in dirs if d not in ignore_dirs]
+              for f in fs:
+                  if f.endswith(('.html','.css','.js','.xml','.json','.md')):
+                      try:
+                          refs += open(os.path.join(root,f),encoding='utf-8',errors='ignore').read()
+                      except:
+                          pass
+
+          removed = []
+          for f in files:
+              name = os.path.basename(f)
+              if name not in refs:
+                  os.remove(f)
+                  removed.append(f)
+
+          with open('cleanup-report.txt','w') as r:
+              if removed:
+                  r.write('Removed unused assets:\\n')
+                  r.write('\\n'.join(removed))
+              else:
+                  r.write('No unused assets found.')
+          PY
+
+      - name: Commit cleanup
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --quiet || git commit -m 'chore: remove unused assets'
+          git push
+
