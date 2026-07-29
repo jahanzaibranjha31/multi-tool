@@ -1,0 +1,42 @@
+name: Build tools.json
+
+# Regenerate tools.json whenever a tool folder (or its metadata) changes,
+# or the workflow is triggered manually. Pushes to tools.json itself are
+# ignored so this can't trigger an infinite loop of commits.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/tool.json"
+      - "scripts/generate-homepage.js"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate tools.json
+        run: node scripts/generate-homepage.js
+
+      - name: Commit tools.json if it changed
+        run: |
+          if git diff --quiet -- tools.json; then
+            echo "tools.json is already up to date — nothing to commit."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add tools.json
+            git commit -m "chore: regenerate tools.json [skip ci]"
+            git push
+          fi
