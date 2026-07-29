@@ -1,0 +1,55 @@
+name: Canonical URL Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1"
+
+jobs:
+  canonical-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Scan HTML Files
+        run: |
+          echo "# Canonical URL Report" > canonical-report.md
+          echo "" >> canonical-report.md
+
+          FAILED=0
+
+          find . -name "*.html" | while read file; do
+
+            echo "Checking $file"
+
+            CANONICAL=$(grep -oi '<link[^>]*rel=["'"'"']canonical["'"'"'][^>]*>' "$file" || true)
+
+            if [ -z "$CANONICAL" ]; then
+              echo "❌ Missing canonical: $file"
+              echo "- ❌ Missing canonical: $file" >> canonical-report.md
+              FAILED=1
+            else
+              echo "✅ Canonical found: $file"
+              echo "- ✅ $file" >> canonical-report.md
+            fi
+
+          done
+
+          exit $FAILED
+
+      - name: Upload Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-report
+          path: canonical-report.md
