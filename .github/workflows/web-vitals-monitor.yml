@@ -1,0 +1,60 @@
+name: Web Vitals Monitor
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # Every Sunday at 03:00 UTC
+    - cron: "0 3 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  web-vitals:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Lighthouse CI
+        run: |
+          npm install -g @lhci/cli
+
+      - name: Run Lighthouse
+        run: |
+          lhci autorun || true
+
+      - name: Create Report Folder
+        run: |
+          mkdir -p reports
+
+      - name: Save Lighthouse Results
+        run: |
+          DATE=$(date +"%Y-%m-%d_%H-%M-%S")
+          cp -r .lighthouseci reports/$DATE || true
+
+      - name: Commit Reports
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add reports/
+
+          git commit -m "Update Web Vitals report" || echo "Nothing to commit"
+
+          git push
+
+      - name: Upload Lighthouse Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-vitals-report
+          path: reports/
