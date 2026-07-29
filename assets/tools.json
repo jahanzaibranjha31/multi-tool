@@ -50,6 +50,11 @@
   }
 ,
   {
+    "name": "sentence correction tool",
+    "url": "sentence-correction-tool/"
+  }
+,
+  {
     "name": "spin wheel",
     "url": "spin-wheel/"
   }
