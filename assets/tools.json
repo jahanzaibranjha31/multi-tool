@@ -40,6 +40,11 @@
   }
 ,
   {
+    "name": "loan calculator",
+    "url": "loan-calculator/"
+  }
+,
+  {
     "name": "password generator",
     "url": "password-generator/"
   }
@@ -72,5 +77,10 @@
   {
     "name": "terms",
     "url": "terms/"
+  }
+,
+  {
+    "name": "unit converter",
+    "url": "unit-converter/"
   }
 ]
