@@ -1,0 +1,210 @@
+[
+  {
+    "slug": "age-calculator",
+    "name": "Age Calculator",
+    "description": "Get your exact age in years, months and days from any birth date.",
+    "category": "Calculators",
+    "icon": "calculator",
+    "popular": true
+  },
+  {
+    "slug": "bmi-calculator",
+    "name": "BMI Calculator",
+    "description": "Calculate your body mass index and see what the result means for your height and weight.",
+    "category": "Calculators",
+    "icon": "health",
+    "popular": true
+  },
+  {
+    "slug": "percentage-calculator",
+    "name": "Percentage Calculator",
+    "description": "Work out percentages, percentage change, and increase or decrease in seconds.",
+    "category": "Calculators",
+    "icon": "calculator",
+    "popular": false
+  },
+  {
+    "slug": "loan-calculator",
+    "name": "Loan Calculator",
+    "description": "Estimate monthly payments and total interest on any loan amount and term.",
+    "category": "Calculators",
+    "icon": "calculator",
+    "popular": false
+  },
+  {
+    "slug": "password-generator",
+    "name": "Password Generator",
+    "description": "Create strong, random passwords with custom length and character rules.",
+    "category": "Security",
+    "icon": "password",
+    "popular": true
+  },
+  {
+    "slug": "random-pin-generator",
+    "name": "Random PIN Generator",
+    "description": "Generate secure numeric PINs of any length for accounts and devices.",
+    "category": "Security",
+    "icon": "password",
+    "popular": false
+  },
+  {
+    "slug": "spin-wheel",
+    "name": "Spin the Wheel",
+    "description": "Make a fair random pick from a custom list of names, tasks or options.",
+    "category": "Generators",
+    "icon": "wheel",
+    "popular": true
+  },
+  {
+    "slug": "random-number-generator",
+    "name": "Random Number Generator",
+    "description": "Generate random numbers within any range, with or without repeats.",
+    "category": "Generators",
+    "icon": "wheel",
+    "popular": false
+  },
+  {
+    "slug": "lorem-ipsum-generator",
+    "name": "Lorem Ipsum Generator",
+    "description": "Generate placeholder paragraphs, sentences or word counts for mockups.",
+    "category": "Generators",
+    "icon": "text",
+    "popular": false
+  },
+  {
+    "slug": "character-counter",
+    "name": "Character Counter",
+    "description": "Count characters, words and sentences for social posts and meta tags.",
+    "category": "Text Tools",
+    "icon": "text",
+    "popular": true
+  },
+  {
+    "slug": "case-converter",
+    "name": "Case Converter",
+    "description": "Switch text between upper case, lower case, title case and sentence case.",
+    "category": "Text Tools",
+    "icon": "text",
+    "popular": false
+  },
+  {
+    "slug": "text-diff-checker",
+    "name": "Text Diff Checker",
+    "description": "Compare two blocks of text and highlight exactly what changed.",
+    "category": "Text Tools",
+    "icon": "text",
+    "popular": false
+  },
+  {
+    "slug": "ai-prompt-token-estimator",
+    "name": "AI Prompt Token Estimator",
+    "description": "Estimate how many tokens your prompt will use before you send it to a model.",
+    "category": "AI Tools",
+    "icon": "ai",
+    "popular": true
+  },
+  {
+    "slug": "ai-text-summarizer",
+    "name": "AI Text Summarizer",
+    "description": "Condense long articles or notes into a short, readable summary.",
+    "category": "AI Tools",
+    "icon": "ai",
+    "popular": false
+  },
+  {
+    "slug": "qr-code-generator",
+    "name": "QR Code Generator",
+    "description": "Turn any link, text or contact card into a scannable QR code.",
+    "category": "Developer Tools",
+    "icon": "qr",
+    "popular": true
+  },
+  {
+    "slug": "json-formatter",
+    "name": "JSON Formatter",
+    "description": "Format, validate and beautify JSON with one click.",
+    "category": "Developer Tools",
+    "icon": "dev",
+    "popular": false
+  },
+  {
+    "slug": "base64-encoder-decoder",
+    "name": "Base64 Encoder / Decoder",
+    "description": "Encode text to Base64 or decode Base64 back to plain text instantly.",
+    "category": "Developer Tools",
+    "icon": "dev",
+    "popular": false
+  },
+  {
+    "slug": "regex-tester",
+    "name": "Regex Tester",
+    "description": "Test regular expressions against sample text with live match highlighting.",
+    "category": "Developer Tools",
+    "icon": "dev",
+    "popular": false
+  },
+  {
+    "slug": "unit-converter",
+    "name": "Unit Converter",
+    "description": "Convert length, weight, temperature, speed and more, instantly.",
+    "category": "Converters",
+    "icon": "convert",
+    "popular": false
+  },
+  {
+    "slug": "currency-converter",
+    "name": "Currency Converter",
+    "description": "Convert between world currencies using up-to-date exchange rates.",
+    "category": "Converters",
+    "icon": "convert",
+    "popular": false
+  },
+  {
+    "slug": "pdf-compressor",
+    "name": "PDF Compressor",
+    "description": "Shrink PDF file size while keeping text and images sharp.",
+    "category": "PDF Tools",
+    "icon": "pdf",
+    "popular": false
+  },
+  {
+    "slug": "pdf-merge",
+    "name": "PDF Merge",
+    "description": "Combine multiple PDF files into a single document in the order you choose.",
+    "category": "PDF Tools",
+    "icon": "pdf",
+    "popular": false
+  },
+  {
+    "slug": "image-resizer",
+    "name": "Image Resizer",
+    "description": "Resize and compress images for web use without losing quality.",
+    "category": "Image Tools",
+    "icon": "image",
+    "popular": false
+  },
+  {
+    "slug": "image-to-base64",
+    "name": "Image to Base64",
+    "description": "Convert an image file into a Base64 string for embedding in code.",
+    "category": "Image Tools",
+    "icon": "image",
+    "popular": false
+  },
+  {
+    "slug": "meta-tag-checker",
+    "name": "Meta Tag Checker",
+    "description": "Preview and audit a page's title, description and social sharing tags.",
+    "category": "SEO Tools",
+    "icon": "seo",
+    "popular": false
+  },
+  {
+    "slug": "keyword-density-checker",
+    "name": "Keyword Density Checker",
+    "description": "See how often keywords appear in your content relative to total word count.",
+    "category": "SEO Tools",
+    "icon": "seo",
+    "popular": false
+  }
+]
