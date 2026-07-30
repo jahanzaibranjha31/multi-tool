@@ -1,0 +1,199 @@
+name: Orphan Pages Checker
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  orphan-pages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Find Orphan Pages
+        run: |
+          python << 'EOF'
+          import os
+          import re
+          import sys
+
+          html_files = []
+
+          for root, dirs, files in os.walk("."):
+              if ".git" in root or ".github" in root:
+                  continue
+
+              for file in files:
+                  if file.endswith(".html"):
+                      html_files.append(os.path.normpath(os.path.join(root, file)))
+
+          pages = set(html_files)
+          incoming_links = {page:0 for page in pages}
+
+          href_pattern = re.compile(r'href=["\']([^"\']+)["\']', re.I)
+
+          for page in pages:
+              try:
+                  with open(page, encoding="utf-8") as f:
+                      html = f.read()
+
+                  links = href_pattern.findall(html)
+
+                  for link in links:
+
+                      if (
+                          link.startswith("http")
+                          or link.startswith("mailto:")
+                          or link.startswith("tel:")
+                          or link.startswith("#")
+                      ):
+                          continue
+
+                      target = os.path.normpath(os.path.join(os.path.dirname(page), link))
+
+                      if os.path.isdir(target):
+                          target = os.path.join(target, "index.html")
+
+                      if not target.endswith(".html"):
+                          target = target.rstrip("/") + "/index.html"
+
+                      target = os.path.normpath(target)
+
+                      if target in incoming_links:
+                          incoming_links[target] += 1
+
+              except Exception as e:
+                  print(e)
+
+          print("")
+          print("===== ORPHAN PAGE REPORT =====")
+          print("")
+
+          orphan_found = False
+
+          for page, count in sorted(incoming_links.items()):
+              if count == 0 and page != "index.html":
+                  orphan_found = True
+                  print(f"❌ {page}")
+
+          if orphan_found:
+              print("")
+              print("One or more orphan pages were found.")
+              sys.exit(1)
+          else:
+              print("✅ No orphan pages found.")
+          EOFname: Orphan Pages Checker
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  orphan-pages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Find Orphan Pages
+        run: |
+          python << 'EOF'
+          import os
+          import re
+          import sys
+
+          html_files = []
+
+          for root, dirs, files in os.walk("."):
+              if ".git" in root or ".github" in root:
+                  continue
+
+              for file in files:
+                  if file.endswith(".html"):
+                      html_files.append(os.path.normpath(os.path.join(root, file)))
+
+          pages = set(html_files)
+          incoming_links = {page:0 for page in pages}
+
+          href_pattern = re.compile(r'href=["\']([^"\']+)["\']', re.I)
+
+          for page in pages:
+              try:
+                  with open(page, encoding="utf-8") as f:
+                      html = f.read()
+
+                  links = href_pattern.findall(html)
+
+                  for link in links:
+
+                      if (
+                          link.startswith("http")
+                          or link.startswith("mailto:")
+                          or link.startswith("tel:")
+                          or link.startswith("#")
+                      ):
+                          continue
+
+                      target = os.path.normpath(os.path.join(os.path.dirname(page), link))
+
+                      if os.path.isdir(target):
+                          target = os.path.join(target, "index.html")
+
+                      if not target.endswith(".html"):
+                          target = target.rstrip("/") + "/index.html"
+
+                      target = os.path.normpath(target)
+
+                      if target in incoming_links:
+                          incoming_links[target] += 1
+
+              except Exception as e:
+                  print(e)
+
+          print("")
+          print("===== ORPHAN PAGE REPORT =====")
+          print("")
+
+          orphan_found = False
+
+          for page, count in sorted(incoming_links.items()):
+              if count == 0 and page != "index.html":
+                  orphan_found = True
+                  print(f"❌ {page}")
+
+          if orphan_found:
+              print("")
+              print("One or more orphan pages were found.")
+              sys.exit(1)
+          else:
+              print("✅ No orphan pages found.")
+          EOF
