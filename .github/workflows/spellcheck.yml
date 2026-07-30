@@ -1,0 +1,71 @@
+name: Spell Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run CSpell
+        uses: streetsidesoftware/cspell-action@v6
+        with:
+          files: |
+            **/*.html
+            **/*.md
+            **/*.txt
+            **/*.json
+          config: |
+            {
+              "version": "0.2",
+              "language": "en",
+              "useGitignore": true,
+              "ignorePaths": [
+                "node_modules/**",
+                ".git/**",
+                ".github/**",
+                "assets/**",
+                "*.min.js",
+                "*.min.css"
+              ],
+              "words": [
+                "Multitools",
+                "GitHub",
+                "GitHubPages",
+                "QRCode",
+                "QRCodeGenerator",
+                "JSON",
+                "Regex",
+                "SEO",
+                "OpenGraph",
+                "JavaScript",
+                "TypeScript",
+                "JSONLD",
+                "favicon",
+                "webmanifest",
+                "robots",
+                "sitemap",
+                "GitHubActions",
+                "Claude",
+                "ChatGPT",
+                "AI",
+                "HTML5",
+                "CSS3",
+                "WebP",
+                "UTF",
+                "API"
+              ]
+            }
