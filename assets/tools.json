@@ -95,6 +95,11 @@
   }
 ,
   {
+    "name": "pdf compressor",
+    "url": "pdf-compressor/"
+  }
+,
+  {
     "name": "percentage calculator",
     "url": "percentage-calculator/"
   }
