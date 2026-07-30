@@ -180,6 +180,11 @@
   }
 ,
   {
+    "name": "text diff checker",
+    "url": "text-diff-checker/"
+  }
+,
+  {
     "name": "tool",
     "url": "tool/"
   }
