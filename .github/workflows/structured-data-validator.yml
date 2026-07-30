@@ -1,0 +1,92 @@
+name: Structured Data Validator
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 4 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-schema:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate JSON-LD Structured Data
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          let errors = 0;
+
+          function walk(dir) {
+            for (const item of fs.readdirSync(dir)) {
+              if (item === '.git' || item === '.github' || item === 'node_modules') continue;
+
+              const full = path.join(dir, item);
+
+              if (fs.statSync(full).isDirectory()) {
+                walk(full);
+              } else if (item.endsWith('.html')) {
+                checkFile(full);
+              }
+            }
+          }
+
+          function checkFile(file) {
+            const html = fs.readFileSync(file, 'utf8');
+
+            const matches = [...html.matchAll(
+              /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi
+            )];
+
+            if (matches.length === 0) {
+              console.log(`⚠ No JSON-LD found: ${file}`);
+              return;
+            }
+
+            matches.forEach((match, i) => {
+              try {
+                const json = JSON.parse(match[1]);
+
+                if (!json["@context"])
+                  throw new Error("Missing @context");
+
+                if (!json["@type"])
+                  throw new Error("Missing @type");
+
+                console.log(`✓ ${file} (Schema ${i + 1}: ${json["@type"]})`);
+
+              } catch (err) {
+                console.log(`✗ ${file}`);
+                console.log(`  ${err.message}`);
+                errors++;
+              }
+            });
+          }
+
+          walk(".");
+
+          if (errors > 0) {
+            console.log("");
+            console.log(`Found ${errors} schema error(s).`);
+            process.exit(1);
+          }
+
+          console.log("");
+          console.log("All structured data is valid.");
+          EOF
