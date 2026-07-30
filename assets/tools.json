@@ -45,6 +45,11 @@
   }
 ,
   {
+    "name": "case converter",
+    "url": "case-converter/"
+  }
+,
+  {
     "name": "character counter",
     "url": "character-counter/"
   }
