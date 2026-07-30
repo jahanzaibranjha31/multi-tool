@@ -75,6 +75,11 @@
   }
 ,
   {
+    "name": "lorem ipsum generator",
+    "url": "lorem-ipsum-generator/"
+  }
+,
+  {
     "name": "password generator",
     "url": "password-generator/"
   }
@@ -97,6 +102,11 @@
   {
     "name": "qr code generator",
     "url": "qr-code-generator/"
+  }
+,
+  {
+    "name": "random number generator",
+    "url": "random-number-generator/"
   }
 ,
   {
