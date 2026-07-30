@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keyword Density Checker — Free SEO Keyword Density & Frequency Tool</title>
+<meta name="description" content="Check keyword density, keyword frequency, and phrase repetition instantly. Free, private, in-browser SEO keyword density checker with density bars, stuffing detection, and export.">
+<link rel="canonical" href="https://example.com/keyword-density-checker/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Multi Tools">
+<meta name="theme-color" content="#12151c">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Multi Tools">
+<meta property="og:title" content="Keyword Density Checker — Free SEO Keyword Density & Frequency Tool">
+<meta property="og:description" content="Analyze keyword density, word frequency, and phrase repetition in seconds. Spot keyword stuffing and optimize on-page SEO with a free browser-based tool.">
+<meta property="og:url" content="https://example.com/keyword-density-checker/">
+<meta property="og:image" content="./og-image.png">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Keyword Density Checker — Free SEO Tool">
+<meta name="twitter:description" content="Instantly analyze keyword density, frequency, and phrase repetition to optimize your content for SEO.">
+<meta name="twitter:image" content="./og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://example.com/#website",
+      "name": "Multi Tools",
+      "url": "https://example.com/"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://example.com/#organization",
+      "name": "Multi Tools",
+      "url": "https://example.com/"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://example.com/keyword-density-checker/#webpage",
+      "url": "https://example.com/keyword-density-checker/",
+      "name": "Keyword Density Checker — Free SEO Keyword Density & Frequency Tool",
+      "isPartOf": { "@id": "https://example.com/#website" },
+      "description": "Check keyword density, keyword frequency, and phrase repetition instantly."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://example.com/" },
+        { "@type": "ListItem", "position": 2, "name": "SEO Tools", "item": "https://example.com/seo-tools/" },
+        { "@type": "ListItem", "position": 3, "name": "Keyword Density Checker", "item": "https://example.com/keyword-density-checker/" }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Keyword Density Checker",
+      "applicationCategory": "BrowserApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "url": "https://example.com/keyword-density-checker/",
+      "description": "A free, in-browser SEO tool that analyzes keyword density, keyword frequency, phrase repetition, readability metrics, and keyword stuffing risk."
+    },
+    {
+      "@type": "Article",
+      "headline": "The Complete Guide to Keyword Density for SEO",
+      "description": "A comprehensive guide to keyword density: formula, ideal ranges, keyword stuffing, semantic SEO, and on-page optimization best practices.",
+      "author": { "@type": "Organization", "name": "Multi Tools" },
+      "publisher": { "@id": "https://example.com/#organization" },
+      "mainEntityOfPage": "https://example.com/keyword-density-checker/",
+      "datePublished": "2026-01-15",
+      "dateModified": "2026-07-30"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a good keyword density percentage?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Most modern SEO practitioners aim for a natural range of roughly 0.5% to 2.5% for a primary keyword, with no strict target enforced by search engines. Focus on natural language and topical coverage rather than hitting an exact number." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Google use keyword density as a ranking factor?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Google has stated repeatedly that keyword density itself is not a direct ranking signal. Modern ranking systems rely on semantic understanding, relevance, and user intent rather than counting keyword occurrences." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is keyword stuffing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Keyword stuffing is the practice of overloading content with a keyword or phrase in an unnatural way to try to manipulate rankings. It reads awkwardly to humans and can trigger spam-related quality signals." }
+        },
+        {
+          "@type": "Question",
+          "name": "How is keyword density calculated?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Keyword density is calculated by dividing the number of times a keyword or phrase appears by the total word count of the content, then multiplying by 100 to express it as a percentage." }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I check 1-word, 2-word, and 3-word phrases separately?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Single words show general topic focus, while 2-word and 3-word phrases reveal how naturally you're using long-tail and semantic variations, which better reflects how people actually search." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#tool-heading">Skip to keyword density tool</a>
+<div class="loading-bar" id="loading-bar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="./" class="brand">
+      <svg class="brand-mark" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v3H4zM4 10.5h11v3H4zM4 17h13v3H4z" fill="currentColor"/><circle cx="20" cy="18.5" r="2.4" fill="currentColor"/></svg>
+      <span class="brand-name">Multi Tools<small>Free Online Utilities</small></span>
+    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/></svg>
+        <span id="theme-label">Dark mode</span>
+      </button>
+    </div>
+  </div>
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        <li><a href="./">Home</a></li>
+        <li><a href="../seo-tools/">SEO Tools</a></li>
+        <li aria-current="page">Keyword Density Checker</li>
+      </ol>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="eyebrow">SEO · Content Analysis</span>
+      <h1>Read your copy the way an <em>editor</em> would — count every word, count every repeat.</h1>
+      <p>Paste your content and get instant keyword density, keyword frequency, phrase repetition, readability stats, and a plain-English SEO score — all calculated locally in your browser. Nothing you paste is ever uploaded.</p>
+      <div class="hero-cta">
+        <a href="#tool-heading" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Analyze my text
+        </a>
+        <a href="#guide-heading" class="btn btn-ghost">Read the keyword density guide</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-section container" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="visually-hidden">Keyword Density Checker Tool</h2>
+
+    <div class="tool-toolbar">
+      <div class="toolbar-group">
+        <label class="toggle"><input type="checkbox" id="opt-stopwords"> Ignore stop words</label>
+        <label class="toggle"><input type="checkbox" id="opt-casesensitive"> Case sensitive</label>
+        <label class="toggle">Min length <input class="field-num" type="number" id="opt-minlen" min="1" max="20" value="1" aria-label="Minimum word length"></label>
+      </div>
+      <div class="toolbar-group">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="text" id="highlight-input" placeholder="Highlight a keyword…" aria-label="Highlight a keyword in the preview">
+        </div>
+      </div>
+    </div>
+
+    <div class="workspace">
+      <!-- Manuscript / Input -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" stroke="currentColor" stroke-width="1.8"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="1.8"/></svg>
+            The Manuscript
+          </h3>
+          <div class="card-actions">
+            <button class="btn btn-ghost btn-sm" id="btn-sample" type="button">Sample text</button>
+            <button class="btn btn-ghost btn-sm" id="btn-clear" type="button">Clear</button>
+          </div>
+        </div>
+        <div class="manuscript">
+          <div class="manuscript-page">
+            <label for="text-input" class="visually-hidden">Paste or type your content to analyze</label>
+            <textarea id="text-input" placeholder="Paste your article, blog post, or page copy here to begin live analysis…" spellcheck="true"></textarea>
+          </div>
+        </div>
+        <div class="mini-stats" id="mini-stats">
+          <div class="mini-stat"><span class="num" id="stat-words">0</span><span class="label">Words</span></div>
+          <div class="mini-stat"><span class="num" id="stat-chars">0</span><span class="label">Characters</span></div>
+          <div class="mini-stat"><span class="num" id="stat-chars-ns">0</span><span class="label">Chars (no space)</span></div>
+          <div class="mini-stat"><span class="num" id="stat-sentences">0</span><span class="label">Sentences</span></div>
+          <div class="mini-stat"><span class="num" id="stat-paragraphs">0</span><span class="label">Paragraphs</span></div>
+          <div class="mini-stat"><span class="num" id="stat-reading">0 min</span><span class="label">Reading time</span></div>
+          <div class="mini-stat"><span class="num" id="stat-speaking">0 min</span><span class="label">Speaking time</span></div>
+        </div>
+        <div class="preview-panel">
+          <h4 class="card-title" style="font-size:.85rem;margin-bottom:8px;color:var(--muted);font-family:var(--font-body);font-weight:600;">Highlighted preview</h4>
+          <div class="preview-box" id="preview-box"><span class="preview-empty">Your highlighted text will appear here once you start typing.</span></div>
+        </div>
+      </div>
+
+      <!-- Desk / Analysis -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3v18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="7" y="12" width="3" height="6" fill="currentColor"/><rect x="12" y="8" width="3" height="10" fill="currentColor"/><rect x="17" y="5" width="3" height="13" fill="currentColor"/></svg>
+            The Editor's Desk
+          </h3>
+          <div class="card-actions">
+            <button class="btn btn-ghost btn-sm" id="btn-copy" type="button">Copy</button>
+            <button class="btn btn-ghost btn-sm" id="btn-export-txt" type="button">Export .txt</button>
+            <button class="btn btn-ghost btn-sm" id="btn-export-csv" type="button">Export .csv</button>
+            <button class="btn btn-ghost btn-sm" id="btn-print" type="button">Print</button>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Analysis views">
+          <button class="tab-btn" role="tab" id="tab-btn-overview" aria-controls="tab-overview" aria-selected="true" type="button">Overview</button>
+          <button class="tab-btn" role="tab" id="tab-btn-1" aria-controls="tab-1" aria-selected="false" type="button">1-Word</button>
+          <button class="tab-btn" role="tab" id="tab-btn-2" aria-controls="tab-2" aria-selected="false" type="button">2-Word</button>
+          <button class="tab-btn" role="tab" id="tab-btn-3" aria-controls="tab-3" aria-selected="false" type="button">3-Word</button>
+        </div>
+
+        <div class="tab-panel" id="tab-overview" role="tabpanel" aria-labelledby="tab-btn-overview">
+          <div class="seo-score">
+            <svg class="gauge" id="seo-gauge" viewBox="0 0 100 100" aria-hidden="true">
+              <circle cx="50" cy="50" r="42" stroke-width="9" fill="none" stroke="var(--surface-2)"/>
+              <circle cx="50" cy="50" r="42" stroke-width="9" fill="none" stroke="var(--accent)" stroke-linecap="round" id="seo-gauge-fill" stroke-dasharray="264" stroke-dashoffset="264" transform="rotate(-90 50 50)"/>
+              <text x="50" y="56" text-anchor="middle" font-size="26" font-family="JetBrains Mono, monospace" fill="var(--ink)" id="seo-gauge-num" font-weight="700">0</text>
+            </svg>
+            <div>
+              <div class="gauge-label"><span class="gauge-value" id="seo-score-word">—</span></div>
+              <p class="gauge-desc" id="seo-score-desc">Add some text to calculate an SEO score based on length, density, and diversity.</p>
+            </div>
+          </div>
+
+          <div id="alerts-container" aria-live="polite"></div>
+
+          <div class="stat-grid">
+            <div class="stat-tile"><span class="num" id="stat-unique">0</span><span class="label">Unique words</span></div>
+            <div class="stat-tile"><span class="num" id="stat-diversity">0%</span><span class="label">Lexical diversity</span></div>
+            <div class="stat-tile"><span class="num" id="stat-avgword">0</span><span class="label">Avg. word length</span></div>
+            <div class="stat-tile"><span class="num" id="stat-avgsent">0</span><span class="label">Avg. sentence length</span></div>
+            <div class="stat-tile"><span class="num" id="stat-longest">—</span><span class="label">Longest word</span></div>
+            <div class="stat-tile"><span class="num" id="stat-shortest">—</span><span class="label">Shortest word</span></div>
+          </div>
+
+          <h4 style="font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:18px 0 4px">Top keyword distribution</h4>
+          <p style="font-size:.78rem;color:var(--muted);margin:0 0 4px" id="distribution-caption">How your #1 keyword is spread across the document (in quarters).</p>
+          <div class="distribution-row" id="distribution-row"></div>
+          <div class="distribution-labels"><span>Start</span><span>Q2</span><span>Q3</span><span>End</span></div>
+        </div>
+
+        <div class="tab-panel" id="tab-1" role="tabpanel" aria-labelledby="tab-btn-1" hidden>
+          <div class="table-scroll">
+            <table class="kw-table" aria-describedby="tab-btn-1">
+              <caption>Top 50 single-word keywords by frequency and density.</caption>
+              <thead><tr><th>Keyword</th><th>Count</th><th>Density</th><th style="width:34%">Distribution</th></tr></thead>
+              <tbody id="table-1"><tr><td colspan="4" style="color:var(--muted)">No data yet — start typing in the manuscript.</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tab-panel" id="tab-2" role="tabpanel" aria-labelledby="tab-btn-2" hidden>
+          <div class="table-scroll">
+            <table class="kw-table" aria-describedby="tab-btn-2">
+              <caption>Top 50 two-word phrases by frequency and density.</caption>
+              <thead><tr><th>Phrase</th><th>Count</th><th>Density</th><th style="width:34%">Distribution</th></tr></thead>
+              <tbody id="table-2"><tr><td colspan="4" style="color:var(--muted)">No data yet — start typing in the manuscript.</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tab-panel" id="tab-3" role="tabpanel" aria-labelledby="tab-btn-3" hidden>
+          <div class="table-scroll">
+            <table class="kw-table" aria-describedby="tab-btn-3">
+              <caption>Top 50 three-word phrases by frequency and density.</caption>
+              <thead><tr><th>Phrase</th><th>Count</th><th>Density</th><th style="width:34%">Distribution</th></tr></thead>
+              <tbody id="table-3"><tr><td colspan="4" style="color:var(--muted)">No data yet — start typing in the manuscript.</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="article-section" aria-labelledby="guide-heading">
+    <div class="container article-grid">
+      <nav class="toc" aria-label="Table of contents">
+        <h2>On this page</h2>
+        <ol>
+          <li><a href="#what-is">What is keyword density?</a></li>
+          <li><a href="#how-it-works">How keyword density works</a></li>
+          <li><a href="#formula">The keyword density formula</a></li>
+          <li><a href="#ideal">Ideal keyword density</a></li>
+          <li><a href="#why-matters">Why keyword density matters</a></li>
+          <li><a href="#best-practices">SEO best practices</a></li>
+          <li><a href="#stuffing">Keyword stuffing</a></li>
+          <li><a href="#semantic">Semantic SEO & LSI keywords</a></li>
+          <li><a href="#intent">Search intent</a></li>
+          <li><a href="#onpage">On-page SEO checklist</a></li>
+          <li><a href="#examples">Examples & comparison</a></li>
+          <li><a href="#mistakes">Common mistakes</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+        </ol>
+      </nav>
+
+      <article class="article">
+        <h1 id="guide-heading">The Complete Guide to Keyword Density for SEO</h1>
+        <p class="lede">Keyword density is one of the oldest metrics in SEO, and one of the most misunderstood. This guide explains exactly what it measures, how to calculate it, what a healthy range looks like in 2026, and how to use the checker above to write content that reads naturally to people while still signaling clear topical relevance to search engines.</p>
+
+        <h2 id="what-is">What is keyword density?</h2>
+        <p>Keyword density is the percentage of times a specific word or phrase appears in a piece of content relative to the total word count. If a 1,000-word article mentions "keyword density" 15 times, the density for that phrase is 1.5%. It's a simple ratio, but it's useful as a quick diagnostic: it tells you, at a glance, whether a term is underused, reasonably present, or repeated so often that it starts to read unnaturally.</p>
+        <p>The metric dates back to an era when search engines relied heavily on literal term matching. Today's ranking systems are far more sophisticated, understanding synonyms, entities, and intent, but density remains a useful proxy for "does this page clearly cover its topic without overdoing it."</p>
+
+        <h2 id="how-it-works">How keyword density works</h2>
+        <p>A density checker tokenizes your text into individual words, then groups repeated words or phrases together and counts occurrences. Single-word analysis shows your core topical vocabulary. Two-word and three-word phrase analysis (often called n-gram analysis) reveal the natural long-tail phrasing your content actually uses, which tends to map more closely to real search queries than any single word does.</p>
+        <p>Most checkers, including the one on this page, let you toggle stop-word filtering (removing words like "the," "and," "is") and case sensitivity, and let you set a minimum word length, because short function words otherwise dominate raw frequency counts without saying anything meaningful about topic focus.</p>
+
+        <h2 id="formula">The keyword density formula</h2>
+        <div class="callout">
+          <strong>Keyword Density (%) = (Keyword Count ÷ Total Word Count) × 100</strong>
+        </div>
+        <p>For example, if the word "coffee" appears 12 times in an 800-word article, the density is (12 ÷ 800) × 100 = 1.5%. The same formula applies to multi-word phrases: count how many times the exact phrase occurs, divide by total word count, and multiply by 100.</p>
+
+        <h2 id="ideal">Ideal keyword density: what the data actually supports</h2>
+        <p>There is no single "correct" percentage that guarantees rankings, and any tool that promises one exact number is oversimplifying. That said, in practice, most well-optimized, naturally written pages land in a broad, comfortable range:</p>
+        <table class="data-table">
+          <thead><tr><th>Density range</th><th>Typical interpretation</th></tr></thead>
+          <tbody>
+            <tr><td>0% – 0.4%</td><td>Topic may be under-signaled; consider whether the primary keyword appears often enough.</td></tr>
+            <tr><td>0.5% – 2.5%</td><td>Generally considered a natural, healthy range for a primary keyword.</td></tr>
+            <tr><td>2.5% – 4%</td><td>Getting repetitive; review sentences for forced or awkward phrasing.</td></tr>
+            <tr><td>4%+</td><td>High risk of keyword stuffing; likely to read unnaturally to visitors.</td></tr>
+          </tbody>
+        </table>
+        <p>Treat these as guardrails, not targets. Writing for a human reader first, then checking density as a sanity check afterward, produces far better results than writing to hit a percentage.</p>
+
+        <h2 id="why-matters">Why keyword density still matters</h2>
+        <ul>
+          <li><strong>Topical clarity:</strong> a healthy density confirms your page actually discusses what its title and headings promise.</li>
+          <li><strong>Content balance:</strong> it flags both under-optimization (keyword barely mentioned) and over-optimization (keyword stuffing).</li>
+          <li><strong>Editing efficiency:</strong> a quick density scan is faster than manually re-reading long-form content to check for repetition.</li>
+          <li><strong>Competitive benchmarking:</strong> comparing your density against top-ranking pages for the same query can highlight gaps in coverage.</li>
+        </ul>
+
+        <h2 id="best-practices">SEO best practices for keyword usage</h2>
+        <ol>
+          <li>Write for the reader's question first; let keyword placement follow naturally from clear explanations.</li>
+          <li>Place your primary keyword in the title, first paragraph, at least one subheading, and the meta description.</li>
+          <li>Use natural variations, synonyms, and related entities instead of repeating the exact phrase.</li>
+          <li>Cover subtopics a knowledgeable person would expect, which naturally introduces semantically related terms.</li>
+          <li>Re-read content aloud; if a sentence feels stuffed, rewrite it rather than trimming a keyword you "need."</li>
+        </ol>
+
+        <h2 id="stuffing">Keyword stuffing: what it is and how to avoid it</h2>
+        <p>Keyword stuffing is the practice of cramming a keyword or phrase into content far more often than natural language would require, purely to try to influence rankings. Classic examples include repeating a phrase in a list with no sentence structure, or hiding keywords in unnaturally long strings. It reads poorly to humans and can be flagged by content-quality systems.</p>
+        <p>The checker above includes automatic stuffing detection: any single-word keyword above roughly 3–4% density, or repeated phrase patterns that appear unnaturally clustered, are flagged with a warning so you can rewrite before publishing.</p>
+
+        <h2 id="semantic">Semantic SEO and LSI keywords</h2>
+        <p>Semantic SEO is the practice of optimizing for meaning and topic coverage rather than exact keyword matches. Related concepts sometimes called "LSI keywords" (latent semantic indexing keywords) are simply the words and phrases naturally associated with your main topic — for a "keyword density" article, that includes terms like word frequency, on-page SEO, content optimization, and search intent. Using these naturally, as this article does, demonstrates topical depth without repeating a single phrase excessively.</p>
+
+        <h2 id="intent">Search intent comes first</h2>
+        <p>Before optimizing density, confirm the content actually satisfies what someone typing the query wants: a definition, a how-to, a comparison, or a tool. Matching intent has a far larger impact on rankings and engagement than any density percentage. Use this checker after drafting, as a refinement step, not as the first thing you optimize for.</p>
+
+        <h2 id="onpage">On-page SEO checklist</h2>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Primary keyword appears in the title tag and H1.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Meta description includes the keyword and a clear reason to click.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Density for the primary keyword sits in a natural, readable range.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Related terms and synonyms appear throughout, not just the exact phrase.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> No single sentence or list repeats a phrase unnaturally.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Headings use a clear H1 → H2 → H3 hierarchy.</li>
+        </ul>
+
+        <h2 id="examples">Examples and comparison</h2>
+        <p>Consider a 1,000-word blog post about "home espresso machines." Mentioning that exact phrase 8 times gives a density of 0.8% — comfortably natural. Mentioning it 45 times pushes density to 4.5%, which is very likely to read as repetitive and mechanical, even before a reader consciously notices why.</p>
+        <table class="data-table">
+          <thead><tr><th>Approach</th><th>Density</th><th>Reader experience</th></tr></thead>
+          <tbody>
+            <tr><td>Keyword mentioned once, no variation</td><td>~0.1%</td><td>Topic feels vague or unclear.</td></tr>
+            <tr><td>Keyword + natural synonyms throughout</td><td>~1.2%</td><td>Reads naturally, topic is clear.</td></tr>
+            <tr><td>Keyword repeated in every sentence</td><td>~5%+</td><td>Feels robotic; likely to be edited down.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="mistakes">Common keyword density mistakes</h2>
+        <ul>
+          <li>Chasing an exact target percentage instead of writing naturally.</li>
+          <li>Ignoring 2-word and 3-word phrase data, which better reflects real search queries.</li>
+          <li>Only checking the exact-match keyword and missing synonym-heavy stuffing.</li>
+          <li>Forgetting to check density after edits, which can silently push a term above a natural range.</li>
+        </ul>
+
+        <h2 id="faq">Frequently asked questions</h2>
+        <details class="faq-item">
+          <summary>What is a good keyword density percentage?</summary>
+          <p>Most practitioners aim for roughly 0.5% to 2.5% for a primary keyword, treated as a guideline rather than a strict rule. Natural language and topical coverage matter more than hitting an exact number.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does Google use keyword density as a ranking factor?</summary>
+          <p>No single density percentage is a direct ranking signal. Modern systems evaluate relevance and semantic meaning far more than raw term counts, so density is best used as a self-editing aid.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is keyword stuffing, exactly?</summary>
+          <p>It's the unnatural overuse of a keyword or phrase intended to manipulate rankings, rather than to communicate clearly with a human reader.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is keyword density calculated?</summary>
+          <p>Divide the number of times a term appears by the total word count, then multiply by 100 to get a percentage.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Should I analyze single words and multi-word phrases separately?</summary>
+          <p>Yes — single words show general topic focus, while 2-word and 3-word phrases reveal natural long-tail usage that better mirrors real search behavior.</p>
+        </details>
+
+        <div class="internal-links">
+          <a class="pill-link" href="../word-counter/">Word Counter Tool</a>
+          <a class="pill-link" href="../character-counter/">Character Counter Tool</a>
+          <a class="pill-link" href="../readability-checker/">Readability Checker</a>
+          <a class="pill-link" href="../plagiarism-checker/">Plagiarism Checker</a>
+        </div>
+
+        <h2 id="conclusion">Conclusion</h2>
+        <p>Keyword density won't make or break your rankings on its own, but it remains one of the fastest ways to sanity-check whether your writing is clear, balanced, and free of accidental repetition. Use it as a final editorial pass — after you've written for your reader and satisfied their search intent — to make sure your content reads as naturally as it ranks.</p>
+
+        <div class="final-cta">
+          <h2>Ready to check your content?</h2>
+          <p>Paste your draft into the tool above and get an instant density, frequency, and readability breakdown — completely free, with nothing uploaded to a server.</p>
+          <a href="#tool-heading" class="btn btn-primary">Analyze my text now</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span>© 2026 Multi Tools. All rights reserved.</span>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="../">All Tools</a>
+      <a href="../word-counter/">Word Counter</a>
+      <a href="../character-counter/">Character Counter</a>
+      <a href="../readability-checker/">Readability Checker</a>
+      <a href="../about/">About</a>
+      <a href="../privacy/">Privacy</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="./script.js"></script>
+</body>
+</html>
