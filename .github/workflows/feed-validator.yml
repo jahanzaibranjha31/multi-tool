@@ -1,0 +1,59 @@
+name: Feed Validator
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+jobs:
+  validate-feed:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install xmllint
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils
+
+      - name: Validate RSS Feed
+        run: |
+          if [ -f "rss.xml" ]; then
+            echo "Checking rss.xml..."
+            xmllint --noout rss.xml
+            echo "✅ rss.xml is valid."
+          else
+            echo "ℹ️ rss.xml not found. Skipping."
+          fi
+
+      - name: Validate Atom Feed
+        run: |
+          if [ -f "atom.xml" ]; then
+            echo "Checking atom.xml..."
+            xmllint --noout atom.xml
+            echo "✅ atom.xml is valid."
+          else
+            echo "ℹ️ atom.xml not found. Skipping."
+          fi
+
+      - name: Validate Feed Folder
+        run: |
+          if [ -d "feed" ]; then
+            find feed -name "*.xml" | while read file; do
+              echo "Checking $file"
+              xmllint --noout "$file"
+            done
+          fi
+
+      - name: Report
+        run: |
+          echo "--------------------------------"
+          echo "Feed validation completed."
+          echo "RSS checked if present."
+          echo "Atom checked if present."
+          echo "All XML files inside /feed checked."
+          echo "--------------------------------"
