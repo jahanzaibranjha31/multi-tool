@@ -80,6 +80,11 @@
   }
 ,
   {
+    "name": "keyword density checker",
+    "url": "keyword-density-checker/"
+  }
+,
+  {
     "name": "loan calculator",
     "url": "loan-calculator/"
   }
