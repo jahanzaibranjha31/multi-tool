@@ -45,6 +45,11 @@
   }
 ,
   {
+    "name": "character counter",
+    "url": "character-counter/"
+  }
+,
+  {
     "name": "contact us",
     "url": "contact-us/"
   }
