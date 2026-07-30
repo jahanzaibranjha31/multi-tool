@@ -65,6 +65,16 @@
   }
 ,
   {
+    "name": "image resizer",
+    "url": "image-resizer/"
+  }
+,
+  {
+    "name": "image to base64",
+    "url": "image-to-base64/"
+  }
+,
+  {
     "name": "json formatter",
     "url": "json-formatter/"
   }
