@@ -1,0 +1,89 @@
+name: Broken Links Fixer
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 4 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Scan internal links
+        run: |
+          python << 'EOF'
+          import os
+          import re
+          import sys
+
+          broken = []
+
+          for root, dirs, files in os.walk("."):
+              if ".git" in root or ".github" in root:
+                  continue
+
+              for file in files:
+                  if not file.endswith(".html"):
+                      continue
+
+                  page = os.path.join(root, file)
+
+                  with open(page, "r", encoding="utf-8", errors="ignore") as f:
+                      html = f.read()
+
+                  links = re.findall(r'href=["\']([^"\']+)["\']', html)
+
+                  for link in links:
+
+                      if (
+                          link.startswith("http")
+                          or link.startswith("https")
+                          or link.startswith("#")
+                          or link.startswith("mailto:")
+                          or link.startswith("tel:")
+                          or link.startswith("javascript:")
+                      ):
+                          continue
+
+                      target = os.path.normpath(os.path.join(root, link))
+
+                      if os.path.isdir(target):
+                          target = os.path.join(target, "index.html")
+
+                      if not os.path.splitext(target)[1]:
+                          target += ".html"
+
+                      if not os.path.exists(target):
+                          broken.append((page, link))
+
+          if broken:
+              print("")
+              print("====================================")
+              print("BROKEN INTERNAL LINKS FOUND")
+              print("====================================")
+
+              for page, link in broken:
+                  print(f"{page}")
+                  print(f" -> {link}")
+                  print("------------------------------------")
+
+              sys.exit(1)
+
+          print("No broken internal links found.")
+          EOF
