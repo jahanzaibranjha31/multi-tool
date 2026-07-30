@@ -1,5 +1,10 @@
 [
   {
+    "name": "about us",
+    "url": "about-us/"
+  }
+,
+  {
     "name": "about",
     "url": "about/"
   }
@@ -30,8 +35,18 @@
   }
 ,
   {
+    "name": "blogs",
+    "url": "blogs/"
+  }
+,
+  {
     "name": "bmi calculator",
     "url": "bmi-calculator/"
+  }
+,
+  {
+    "name": "contact us",
+    "url": "contact-us/"
   }
 ,
   {
@@ -75,8 +90,18 @@
   }
 ,
   {
+    "name": "privacy",
+    "url": "privacy/"
+  }
+,
+  {
     "name": "qr code generator",
     "url": "qr-code-generator/"
+  }
+,
+  {
+    "name": "regex tester",
+    "url": "regex-tester/"
   }
 ,
   {
@@ -90,8 +115,23 @@
   }
 ,
   {
+    "name": "terms and conditions",
+    "url": "terms-and-conditions/"
+  }
+,
+  {
     "name": "terms",
     "url": "terms/"
+  }
+,
+  {
+    "name": "tool",
+    "url": "tool/"
+  }
+,
+  {
+    "name": "tools",
+    "url": "tools/"
   }
 ,
   {
