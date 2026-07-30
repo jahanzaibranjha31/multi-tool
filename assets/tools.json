@@ -140,6 +140,11 @@
   }
 ,
   {
+    "name": "random pin generator",
+    "url": "random-pin-generator/"
+  }
+,
+  {
     "name": "regex tester",
     "url": "regex-tester/"
   }
