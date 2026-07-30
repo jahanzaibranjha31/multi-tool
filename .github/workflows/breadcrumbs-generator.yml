@@ -1,0 +1,116 @@
+name: Generate Breadcrumbs
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  breadcrumbs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate Breadcrumbs
+        run: |
+          const fs = require("fs");
+          const path = require("path");
+
+          function getHtmlFiles(dir) {
+            let files = [];
+
+            for (const file of fs.readdirSync(dir)) {
+
+              if (
+                file === ".git" ||
+                file === ".github" ||
+                file === "node_modules"
+              ) continue;
+
+              const full = path.join(dir, file);
+
+              if (fs.statSync(full).isDirectory()) {
+                files.push(...getHtmlFiles(full));
+              } else if (file === "index.html") {
+                files.push(full);
+              }
+            }
+
+            return files;
+          }
+
+          const htmlFiles = getHtmlFiles(".");
+
+          htmlFiles.forEach(file => {
+
+            let html = fs.readFileSync(file, "utf8");
+
+            if (html.includes("breadcrumb")) return;
+
+            const relative = file
+              .replace("./","")
+              .replace(/\\/g,"/")
+              .replace("/index.html","");
+
+            const parts = relative === "index.html"
+              ? []
+              : relative.split("/");
+
+            let crumbs = `
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+              <a href="/">Home</a>
+            `;
+
+            let current = "";
+
+            parts.forEach((part,index)=>{
+
+              current += "/" + part;
+
+              const title = part
+                .replace(/-/g," ")
+                .replace(/\b\w/g,c=>c.toUpperCase());
+
+              crumbs += `
+              &nbsp;›&nbsp;
+              <a href="${current}/">${title}</a>
+              `;
+            });
+
+            crumbs += `
+            </nav>
+            `;
+
+            html = html.replace("<body>","<body>\n"+crumbs);
+
+            fs.writeFileSync(file,html);
+
+            console.log("Breadcrumb added:",file);
+
+          });
+
+        shell: node
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add .
+
+          git diff --cached --quiet || git commit -m "Auto generate breadcrumbs"
+
+          git push
