@@ -90,6 +90,11 @@
   }
 ,
   {
+    "name": "meta tag checker",
+    "url": "meta-tag-checker/"
+  }
+,
+  {
     "name": "password generator",
     "url": "password-generator/"
   }
