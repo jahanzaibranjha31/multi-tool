@@ -1,0 +1,83 @@
+name: Duplicate Content Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  duplicate-content:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Scan for duplicate content
+        run: |
+          python << 'EOF'
+          import os
+          import hashlib
+          import re
+          import sys
+
+          html_files = []
+
+          for root, dirs, files in os.walk("."):
+              if ".git" in root or ".github" in root:
+                  continue
+
+              for file in files:
+                  if file.endswith(".html"):
+                      html_files.append(os.path.join(root, file))
+
+          hashes = {}
+          duplicates = []
+
+          for path in html_files:
+              try:
+                  with open(path, "r", encoding="utf-8") as f:
+                      html = f.read()
+
+                  html = re.sub(r"<script.*?</script>", "", html, flags=re.S | re.I)
+                  html = re.sub(r"<style.*?</style>", "", html, flags=re.S | re.I)
+                  html = re.sub(r"<[^>]+>", " ", html)
+                  html = re.sub(r"\s+", " ", html).strip().lower()
+
+                  digest = hashlib.sha256(html.encode()).hexdigest()
+
+                  if digest in hashes:
+                      duplicates.append((hashes[digest], path))
+                  else:
+                      hashes[digest] = path
+
+              except Exception as e:
+                  print(f"Error reading {path}: {e}")
+
+          if duplicates:
+              print("")
+              print("===================================")
+              print("Duplicate Content Found")
+              print("===================================")
+
+              for original, duplicate in duplicates:
+                  print(f"{original}")
+                  print(f"{duplicate}")
+                  print("-----------------------------------")
+
+              sys.exit(1)
+
+          print("No duplicate content found.")
+          EOF
