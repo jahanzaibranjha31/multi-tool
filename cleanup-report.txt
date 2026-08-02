@@ -1,0 +1,1 @@
+Removed unused assets:\n./scripts/generate-redirects.js\n./scripts/generate-sitemap.js\n./scripts/navigation-sync.js\n./scripts/generate-blog.js\n./assets/icons/icon-512.png\n./assets/icons/icon-192.png
