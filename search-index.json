@@ -7,7 +7,7 @@
   {
     "title": "Redirecting...",
     "url": "about-us/",
-    "content": "Redirecting... location.replace(\"/about/\") Redirecting..."
+    "content": "Redirecting... location.replace(\"/about/\"); Redirecting..."
   },
   {
     "title": "Regex Tester – Free Online Regular Expression Tool with Live Match Highlighting",
@@ -32,7 +32,7 @@
   {
     "title": "Redirecting...",
     "url": "terms-and-conditions/",
-    "content": "Redirecting... location.replace(\"/terms/\") Redirecting..."
+    "content": "Redirecting... location.replace(\"/terms/\"); Redirecting..."
   },
   {
     "title": "AI Text Summarizer – Summarize Long Text Instantly | Multi Tools",
@@ -62,7 +62,7 @@
   {
     "title": "Redirecting...",
     "url": "tool/",
-    "content": "Redirecting... location.replace(\"/all-tools/\") Redirecting..."
+    "content": "Redirecting... location.replace(\"/all-tools/\"); Redirecting..."
   },
   {
     "title": "About Multi Tools – Free Online Tools for Everyone",
@@ -77,12 +77,12 @@
   {
     "title": "Redirecting...",
     "url": "privacy/",
-    "content": "Redirecting... location.replace(\"/privacy-policy/\") Redirecting..."
+    "content": "Redirecting... location.replace(\"/privacy-policy/\"); Redirecting..."
   },
   {
     "title": "Redirecting...",
     "url": "contact-us/",
-    "content": "Redirecting... location.replace(\"/contact/\") Redirecting..."
+    "content": "Redirecting... location.replace(\"/contact/\"); Redirecting..."
   },
   {
     "title": "JSON Formatter Online – Free Beautifier, Validator & Minifier | Multi Tools",
@@ -137,12 +137,12 @@
   {
     "title": "Redirecting...",
     "url": "tools/",
-    "content": "Redirecting... location.replace(\"/all-tools/\") Redirecting..."
+    "content": "Redirecting... location.replace(\"/all-tools/\"); Redirecting..."
   },
   {
     "title": "Redirecting...",
     "url": "blogs/",
-    "content": "Redirecting... location.replace(\"/Blog/\") Redirecting..."
+    "content": "Redirecting... location.replace(\"/Blog/\"); Redirecting..."
   },
   {
     "title": "Multi Tools Blog – Free Online Tool Guides, Tutorials & Tips",
