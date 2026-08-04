@@ -1,4 +1,4 @@
-# Multi Tools – Free Online Tools for Everyone
+# Multi Tool – Free Online Tools for Everyone
 
 Multi Tools is a free collection of fast, responsive, and SEO-friendly online tools built with HTML, CSS, and JavaScript. Our platform provides powerful web utilities, calculators, converters, generators, text tools, developer tools, productivity tools, and SEO tools designed for speed, accuracy, and ease of use.
 
@@ -24,7 +24,7 @@ Multi Tools is a free collection of fast, responsive, and SEO-friendly online to
 - PDF Compressor
 - Unit & Currency Converters
 
-## Why Choose Multi Tools?
+## Why Choose Multi Tool?
 
 - Fast & Lightweight
 - Mobile-Friendly Design
