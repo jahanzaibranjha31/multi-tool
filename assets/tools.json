@@ -170,11 +170,6 @@
   }
 ,
   {
-    "name": "terms and conditions",
-    "url": "terms-and-conditions/"
-  }
-,
-  {
     "name": "terms",
     "url": "terms/"
   }
@@ -182,11 +177,6 @@
   {
     "name": "text diff checker",
     "url": "text-diff-checker/"
-  }
-,
-  {
-    "name": "tool",
-    "url": "tool/"
   }
 ,
   {
