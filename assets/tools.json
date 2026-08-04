@@ -135,11 +135,6 @@
   }
 ,
   {
-    "name": "privacy",
-    "url": "privacy/"
-  }
-,
-  {
     "name": "qr code generator",
     "url": "qr-code-generator/"
   }
