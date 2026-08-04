@@ -1,9 +1,7 @@
 User-agent: *
 Allow: /
 
-# Block unnecessary folders
 Disallow: /.github/
 Disallow: /scripts/
 
-# Sitemap
-Sitemap: https://jahanzaibranjha31.github.io/multi-tools/sitemap.xml
+Sitemap: https://multitool.click/sitemap.xml
