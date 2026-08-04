@@ -26,9 +26,11 @@ jobs:
           echo "# Canonical URL Report" > canonical-report.md
           echo "" >> canonical-report.md
 
+          EXPECTED_DOMAIN="https://multitool.click"
           FAILED=0
 
-          find . -name "*.html" | while read file; do
+          # Use process substitution (not a pipe) so FAILED survives outside the loop
+          while IFS= read -r file; do
 
             echo "Checking $file"
 
@@ -38,12 +40,17 @@ jobs:
               echo "❌ Missing canonical: $file"
               echo "- ❌ Missing canonical: $file" >> canonical-report.md
               FAILED=1
+            elif ! echo "$CANONICAL" | grep -q "$EXPECTED_DOMAIN"; then
+              echo "⚠️ Canonical present but wrong domain: $file"
+              echo "$CANONICAL"
+              echo "- ⚠️ Wrong domain in canonical: $file ($CANONICAL)" >> canonical-report.md
+              FAILED=1
             else
               echo "✅ Canonical found: $file"
               echo "- ✅ $file" >> canonical-report.md
             fi
 
-          done
+          done < <(find . -name "*.html" -not -path "./node_modules/*")
 
           exit $FAILED
 
