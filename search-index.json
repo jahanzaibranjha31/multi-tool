@@ -67,7 +67,7 @@
   {
     "title": "Redirecting...",
     "url": "contact-us/",
-    "content": "Redirecting... location.replace(\"/contact/\"); Redirecting..."
+    "content": "Redirecting... location.replace(\"/contact/\") Redirecting..."
   },
   {
     "title": "JSON Formatter Online – Free Beautifier, Validator & Minifier | Multi Tools",
