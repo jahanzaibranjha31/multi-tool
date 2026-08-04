@@ -1,4 +1,4 @@
-name: Auto Generate Sitemap
+name: Generate Sitemap
 
 on:
   push:
@@ -10,11 +10,11 @@ permissions:
   contents: write
 
 jobs:
-  generate-sitemap:
+  sitemap:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Generate sitemap.xml
@@ -23,42 +23,57 @@ jobs:
           BASE_URL="https://multitool.click"
           TODAY=$(date +%F)
 
-          cat > sitemap.xml <<EOF
-          <?xml version="1.0" encoding="UTF-8"?>
-          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-          EOF
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
+          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
 
           find . -type f -name "index.html" \
             ! -path "./.git/*" \
             ! -path "./.github/*" \
             ! -path "./node_modules/*" \
             ! -path "./vendor/*" \
-            | sort | while read file
+            ! -path "./.well-known/*" \
+            | sort | while read FILE
           do
-            DIR=$(dirname "$file")
+
+            DIR=$(dirname "$FILE")
+            DIR=${DIR#./}
 
             if [ "$DIR" = "." ]; then
               URL="$BASE_URL/"
               PRIORITY="1.0"
               CHANGEFREQ="daily"
-            else
-              DIR=${DIR#./}
+
+            elif [[ "$DIR" == Blog* ]]; then
               URL="$BASE_URL/$DIR/"
               PRIORITY="0.8"
+              CHANGEFREQ="weekly"
+
+            elif [[ "$DIR" == *privacy* || "$DIR" == *terms* || "$DIR" == *disclaimer* || "$DIR" == *about* || "$DIR" == *contact* ]]; then
+              URL="$BASE_URL/$DIR/"
+              PRIORITY="0.5"
+              CHANGEFREQ="monthly"
+
+            else
+              URL="$BASE_URL/$DIR/"
+              PRIORITY="0.9"
               CHANGEFREQ="weekly"
             fi
 
             cat >> sitemap.xml <<EOF
-            <url>
-              <loc>$URL</loc>
-              <lastmod>$TODAY</lastmod>
-              <changefreq>$CHANGEFREQ</changefreq>
-              <priority>$PRIORITY</priority>
-            </url>
-          EOF
+          <url>
+            <loc>$URL</loc>
+            <lastmod>$TODAY</lastmod>
+            <changefreq>$CHANGEFREQ</changefreq>
+            <priority>$PRIORITY</priority>
+          </url>
+EOF
+
           done
 
           echo "</urlset>" >> sitemap.xml
+
+          awk '!seen[$0]++' sitemap.xml > sitemap-temp.xml
+          mv sitemap-temp.xml sitemap.xml
 
       - name: Commit sitemap.xml
         run: |
@@ -68,8 +83,8 @@ jobs:
           git add sitemap.xml
 
           if git diff --cached --quiet; then
-            echo "No changes to sitemap."
+            echo "No sitemap changes."
           else
-            git commit -m "🤖 Auto-update sitemap.xml"
+            git commit -m "🤖 Auto update sitemap"
             git push
           fi
