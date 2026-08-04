@@ -3,9 +3,7 @@ name: Generate Sitemap
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
-  schedule:
-    - cron: "0 3 * * 1"
+  
 
 jobs:
   generate-sitemap:
@@ -15,7 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # full history needed so each page's lastmod is accurate
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
