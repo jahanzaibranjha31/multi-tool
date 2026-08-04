@@ -1,10 +1,5 @@
 [
   {
-    "name": "about us",
-    "url": "about-us/"
-  }
-,
-  {
     "name": "about",
     "url": "about/"
   }
@@ -32,11 +27,6 @@
   {
     "name": "base64 encoder decoder",
     "url": "base64-encoder-decoder/"
-  }
-,
-  {
-    "name": "blogs",
-    "url": "blogs/"
   }
 ,
   {
@@ -172,11 +162,6 @@
   {
     "name": "text diff checker",
     "url": "text-diff-checker/"
-  }
-,
-  {
-    "name": "tools",
-    "url": "tools/"
   }
 ,
   {
