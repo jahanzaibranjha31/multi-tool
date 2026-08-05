@@ -1,4 +1,4 @@
-name: Generate Sitemap
+name: 🤖 Auto Sitemap Generator
 
 on:
   push:
@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Generate sitemap.xml
         shell: bash
@@ -39,18 +41,30 @@ EOF
             ! -path "./vendor/*" \
             ! -path "./dist/*" \
             ! -path "./build/*" \
-            | sort | while read file
+            | sort | while read FILE
           do
-            DIR=$(dirname "$file")
+
+            DIR=$(dirname "$FILE")
             DIR="${DIR#./}"
 
-            if [ "$DIR" = "." ]; then
+            if [[ "$DIR" == "." ]]; then
               URL="$BASE_URL/"
               PRIORITY="1.0"
               CHANGEFREQ="daily"
-            else
+
+            elif [[ "$DIR" == Blog* ]]; then
               URL="$BASE_URL/$DIR/"
               PRIORITY="0.8"
+              CHANGEFREQ="weekly"
+
+            elif [[ "$DIR" =~ (privacy|terms|disclaimer|about|contact) ]]; then
+              URL="$BASE_URL/$DIR/"
+              PRIORITY="0.5"
+              CHANGEFREQ="monthly"
+
+            else
+              URL="$BASE_URL/$DIR/"
+              PRIORITY="0.9"
               CHANGEFREQ="weekly"
             fi
 
@@ -62,16 +76,20 @@ EOF
     <priority>$PRIORITY</priority>
   </url>
 EOF
+
           done
 
           echo "</urlset>" >> sitemap.xml
+
+          awk '!seen[$0]++' sitemap.xml > sitemap-clean.xml
+          mv sitemap-clean.xml sitemap.xml
 
       - name: Validate sitemap
         run: |
           grep "<url>" sitemap.xml
           grep "</urlset>" sitemap.xml
 
-      - name: Commit changes
+      - name: Commit sitemap
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -79,7 +97,7 @@ EOF
           git add sitemap.xml
 
           if git diff --cached --quiet; then
-            echo "No sitemap changes."
+            echo "No changes."
           else
             git commit -m "🤖 Auto-update sitemap.xml"
             git push
