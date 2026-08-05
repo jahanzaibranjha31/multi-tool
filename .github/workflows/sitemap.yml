@@ -1,4 +1,4 @@
-name: 🤖 Auto Sitemap Generator
+name: Auto Generate Sitemap
 
 on:
   push:
@@ -27,48 +27,33 @@ jobs:
           BASE_URL="https://multitool.click"
           TODAY=$(date -u +"%Y-%m-%d")
 
-          cat > sitemap.xml <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-EOF
+          {
+            echo '<?xml version="1.0" encoding="UTF-8"?>'
+            echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
 
-          find . \
-            -type f \
-            -name "index.html" \
-            ! -path "./.git/*" \
-            ! -path "./.github/*" \
-            ! -path "./node_modules/*" \
-            ! -path "./vendor/*" \
-            ! -path "./dist/*" \
-            ! -path "./build/*" \
-            | sort | while read FILE
-          do
+            find . -type f -name "index.html" \
+              ! -path "./.git/*" \
+              ! -path "./.github/*" \
+              ! -path "./node_modules/*" \
+              ! -path "./vendor/*" \
+              ! -path "./dist/*" \
+              ! -path "./build/*" \
+              | sort | while read FILE
+            do
+              DIR=$(dirname "$FILE")
+              DIR="${DIR#./}"
 
-            DIR=$(dirname "$FILE")
-            DIR="${DIR#./}"
+              if [ "$DIR" = "." ]; then
+                URL="$BASE_URL/"
+                PRIORITY="1.0"
+                CHANGEFREQ="daily"
+              else
+                URL="$BASE_URL/$DIR/"
+                PRIORITY="0.8"
+                CHANGEFREQ="weekly"
+              fi
 
-            if [[ "$DIR" == "." ]]; then
-              URL="$BASE_URL/"
-              PRIORITY="1.0"
-              CHANGEFREQ="daily"
-
-            elif [[ "$DIR" == Blog* ]]; then
-              URL="$BASE_URL/$DIR/"
-              PRIORITY="0.8"
-              CHANGEFREQ="weekly"
-
-            elif [[ "$DIR" =~ (privacy|terms|disclaimer|about|contact) ]]; then
-              URL="$BASE_URL/$DIR/"
-              PRIORITY="0.5"
-              CHANGEFREQ="monthly"
-
-            else
-              URL="$BASE_URL/$DIR/"
-              PRIORITY="0.9"
-              CHANGEFREQ="weekly"
-            fi
-
-            cat >> sitemap.xml <<EOF
+              cat <<EOF
   <url>
     <loc>$URL</loc>
     <lastmod>$TODAY</lastmod>
@@ -77,12 +62,13 @@ EOF
   </url>
 EOF
 
-          done
+            done
 
-          echo "</urlset>" >> sitemap.xml
+            echo '</urlset>'
+          } > sitemap.xml
 
-          awk '!seen[$0]++' sitemap.xml > sitemap-clean.xml
-          mv sitemap-clean.xml sitemap.xml
+          awk '!seen[$0]++' sitemap.xml > sitemap.tmp
+          mv sitemap.tmp sitemap.xml
 
       - name: Validate sitemap
         run: |
@@ -97,7 +83,7 @@ EOF
           git add sitemap.xml
 
           if git diff --cached --quiet; then
-            echo "No changes."
+            echo "No sitemap changes."
           else
             git commit -m "🤖 Auto-update sitemap.xml"
             git push
