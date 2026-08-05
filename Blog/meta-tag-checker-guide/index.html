@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta Tag Checker: How to Audit Your Page's SEO Tags (2026 Guide)</title>
+<meta name="description" content="Learn what a meta tag checker actually inspects — title, description, canonical, robots, Open Graph, and Twitter Card tags — and how to fix common SEO mistakes.">
+<link rel="canonical" href="https://multitool.click/meta-tag-checker/">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Meta Tag Checker: How to Audit Your Page's SEO Tags">
+<meta property="og:description" content="A practical guide to every tag a meta tag checker scans, why each one matters for search and social sharing, and how to fix the most common mistakes.">
+<meta property="og:url" content="https://multitool.click/meta-tag-checker/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Meta Tag Checker: How to Audit Your Page's SEO Tags">
+<meta name="twitter:description" content="What a meta tag checker scans, why each tag matters, and how to fix the mistakes that hurt rankings and link previews.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Meta Tag Checker: How to Audit Your Page's SEO Tags",
+  "description": "A practical guide to every tag a meta tag checker scans, why each one matters for search and social sharing, and how to fix the most common mistakes.",
+  "author": { "@type": "Organization", "name": "Multi Tool" },
+  "publisher": { "@type": "Organization", "name": "Multi Tool" },
+  "mainEntityOfPage": "https://multitool.click/meta-tag-checker/"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a meta tag checker actually scan?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It reads the <head> section of a page and reports on the title tag, meta description, canonical link, robots directives, Open Graph tags, Twitter Card tags, viewport tag, and character encoding — then flags any that are missing, duplicated, or the wrong length." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a free meta tag checker as accurate as a paid one?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For reading what tags exist in a page's HTML, a free checker is just as accurate, because it's reading the same source code a browser or search engine reads. Paid tools mainly add extras like historical tracking or bulk site crawls." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the meta description affect Google rankings?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not directly. Google does not use the meta description as a ranking signal, but a clear, well-written one can improve click-through rate from the search results page, which is why it's still worth checking." }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between noindex and nofollow?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Noindex tells search engines not to show that page in search results. Nofollow tells search engines not to pass ranking credit through the links on that page. A page can carry either directive alone or both together." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do my links look wrong when shared on social media?",
+      "acceptedAnswer": { "@type": "Answer", "text": "That's almost always a missing or incomplete Open Graph tag set (og:title, og:description, og:image, og:url). Social platforms build the preview card from those tags, not from the page's title tag." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="https://multitool.click/">
+      <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+      <span class="brand-name">Multi Tool</span>
+    </a>
+    <a class="header-cta" href="https://multitool.click/meta-tag-checker/">Open the checker →</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">SEO &amp; on-page tags</p>
+      <h1>What's actually inside your &lt;head&gt;?</h1>
+      <p class="hero-sub">A meta tag checker reads the handful of lines that decide how your page looks in Google, how it looks when it's shared on social media, and whether it can be indexed at all. This guide walks through every tag worth checking — and what to do when one is missing.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://multitool.click/meta-tag-checker/">Scan a URL now</a>
+        <a class="btn btn-ghost" href="#tags">See what gets checked</a>
+      </div>
+    </div>
+    <div class="hero-panel" aria-hidden="true">
+      <div class="panel-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="panel-label">head.html</span>
+      </div>
+      <pre class="code-scan"><code><span class="scan-line ok">&lt;title&gt;Meta Tag Checker – Multi Tool&lt;/title&gt;</span>
+<span class="scan-line ok">&lt;meta name="description" content="..."&gt;</span>
+<span class="scan-line warn">&lt;meta property="og:image" content=""&gt;</span>
+<span class="scan-line ok">&lt;link rel="canonical" href="..."&gt;</span>
+<span class="scan-line err">&lt;meta name="robots" content="noindex"&gt;</span>
+<span class="scan-line ok">&lt;meta name="viewport" content="..."&gt;</span></code></pre>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <nav class="toc wrap" aria-label="Table of contents">
+    <p class="toc-label">On this page</p>
+    <ol>
+      <li><a href="#what">What a meta tag checker does</a></li>
+      <li><a href="#tags">The tags worth checking</a></li>
+      <li><a href="#howto">How to check a page in under a minute</a></li>
+      <li><a href="#mistakes">Common mistakes it catches</a></li>
+      <li><a href="#limits">Length limits reference table</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </nav>
+
+  <article class="wrap prose">
+
+    <section id="what">
+      <h2>What a meta tag checker does</h2>
+      <p>A meta tag checker fetches a page's raw HTML and reads only the &lt;head&gt; section — the part a visitor never sees but that search engines and social platforms read closely. It's not measuring writing quality or design; it's confirming that a specific set of tags exist, aren't duplicated, and fall within the length a search result or a share card can actually display.</p>
+      <p>That distinction matters because good content with a broken &lt;head&gt; still underperforms. A page can rank on merit and still get skipped in the results because its title tag is truncated, or get shared on social media with a blank preview because an Open Graph image tag was never set. Checking the tags is a five-minute habit that catches problems a spell-checker never will.</p>
+    </section>
+
+    <section id="tags">
+      <h2>The tags worth checking</h2>
+
+      <h3>Title tag</h3>
+      <p>The title tag is the blue, clickable headline in a search result and the text shown on a browser tab. Google typically displays around 50–60 characters before truncating, though it sometimes rewrites the tag entirely if it doesn't match the query well. Every page should have exactly one title tag, and it should describe that specific page rather than repeating the site name alone.</p>
+
+      <h3>Meta description</h3>
+      <p>The meta description is the summary line under the title in search results. It has no direct effect on rankings, but it directly affects whether someone clicks. A checker flags pages with no description at all, since Google will then auto-generate a snippet from page content, which is rarely as persuasive as a written one.</p>
+
+      <h3>Canonical link</h3>
+      <p>The canonical tag tells search engines which URL is the "real" version when the same content is reachable at more than one address — for example with and without a trailing slash, or through tracking parameters. Without it, search engines have to guess, which can split ranking signals between duplicate URLs instead of consolidating them into one.</p>
+
+      <h3>Robots meta tag</h3>
+      <p>This tag gives direct instructions to crawlers. <code>noindex</code> keeps a page out of search results entirely; <code>nofollow</code> stops ranking credit from passing through its links. A checker highlights this tag because an accidental <code>noindex</code> — often left over from a staging site — is one of the most common reasons a page silently disappears from Google.</p>
+
+      <h3>Open Graph tags</h3>
+      <p>Open Graph tags (<code>og:title</code>, <code>og:description</code>, <code>og:image</code>, <code>og:url</code>) control how a link looks when it's pasted into most social and messaging platforms. If they're missing, the platform falls back to guessing from page content, which usually means a poor image choice or a truncated headline.</p>
+
+      <h3>Twitter Card tags</h3>
+      <p>X (formerly Twitter) reads its own set of tags rather than always falling back to Open Graph. A <code>twitter:card</code> tag set to <code>summary_large_image</code>, alongside a title and description, is what produces the large preview card instead of a plain text link.</p>
+
+      <h3>Viewport and charset</h3>
+      <p>These two are easy to overlook because they're not about search visibility — they're about rendering. A missing viewport tag can make a page render as a shrunk desktop layout on mobile, and a missing or incorrect charset declaration can turn special characters into garbled text.</p>
+    </section>
+
+    <section id="howto">
+      <h2>How to check a page in under a minute</h2>
+      <ol class="steps">
+        <li><strong>Paste the URL.</strong> Open the <a href="https://multitool.click/meta-tag-checker/">Meta Tag Checker</a> and drop in the page address you want to audit.</li>
+        <li><strong>Read the pass/fail list.</strong> The tool lists every tag it found, flags anything missing or over length, and shows the raw value it read.</li>
+        <li><strong>Preview the result.</strong> Compare how the page is likely to appear in a search result versus a social share card, side by side.</li>
+        <li><strong>Fix and re-check.</strong> Update the tags in your page's source, then re-run the scan to confirm the fix actually landed.</li>
+      </ol>
+    </section>
+
+    <section id="mistakes">
+      <h2>Common mistakes a check catches</h2>
+      <ul class="checklist">
+        <li>Two title tags on the same page (usually from a template and a page-level override both firing)</li>
+        <li>A meta description copied across every page on the site</li>
+        <li>A canonical tag pointing to the wrong page after a URL structure change</li>
+        <li>A <code>noindex</code> tag left in place after a staging site went live</li>
+        <li>An <code>og:image</code> tag pointing to an image file that no longer exists</li>
+        <li>A title tag padded with keywords instead of written for a reader</li>
+      </ul>
+    </section>
+
+    <section id="limits">
+      <h2>Length limits reference table</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Tag</th><th>Practical limit</th><th>Where it shows up</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Title tag</td><td>~50–60 characters</td><td>Search result, browser tab</td></tr>
+            <tr><td>Meta description</td><td>~150–160 characters</td><td>Search result snippet</td></tr>
+            <tr><td>og:title</td><td>~60–90 characters</td><td>Social share card</td></tr>
+            <tr><td>og:description</td><td>~110–200 characters</td><td>Social share card</td></tr>
+            <tr><td>og:image</td><td>1200×630px recommended</td><td>Social share card image</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">These are practical display limits, not hard technical caps — going over just means the platform truncates the text rather than rejecting the tag.</p>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <div class="faq-list">
+        <details>
+          <summary>What does a meta tag checker actually scan?</summary>
+          <p>It reads the &lt;head&gt; section of a page and reports on the title tag, meta description, canonical link, robots directives, Open Graph tags, Twitter Card tags, viewport tag, and character encoding — then flags any that are missing, duplicated, or the wrong length.</p>
+        </details>
+        <details>
+          <summary>Is a free meta tag checker as accurate as a paid one?</summary>
+          <p>For reading what tags exist in a page's HTML, yes — it's reading the same source code a browser or search engine reads. Paid tools mainly add extras like historical tracking or bulk site crawls.</p>
+        </details>
+        <details>
+          <summary>Does the meta description affect Google rankings?</summary>
+          <p>Not directly. Google doesn't use it as a ranking signal, but a clear, well-written description can improve click-through rate from the results page, which is why it's still worth getting right.</p>
+        </details>
+        <details>
+          <summary>What's the difference between noindex and nofollow?</summary>
+          <p><code>noindex</code> tells search engines not to show that page in results. <code>nofollow</code> tells them not to pass ranking credit through that page's links. A page can carry either or both.</p>
+        </details>
+        <details>
+          <summary>Why do my links look wrong when shared on social media?</summary>
+          <p>That's almost always a missing or incomplete Open Graph tag set (<code>og:title</code>, <code>og:description</code>, <code>og:image</code>, <code>og:url</code>). Social platforms build the preview card from those tags, not from the page's title tag.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="cta-block">
+      <h2>Run the check</h2>
+      <p>Paste in any URL and see exactly which tags are set, missing, or too long — plus a preview of how the page will look in search and on social.</p>
+      <a class="btn btn-primary" href="https://multitool.click/meta-tag-checker/">Open the Meta Tag Checker →</a>
+    </section>
+
+    <section class="sources">
+      <h2>Further reading</h2>
+      <ul>
+        <li><a href="https://developers.google.com/search/docs/appearance/title-link" target="_blank" rel="noopener noreferrer">Google Search Central — Influencing your title links</a></li>
+        <li><a href="https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag" target="_blank" rel="noopener noreferrer">Google Search Central — Robots meta tag specifications</a></li>
+        <li><a href="https://ogp.me/" target="_blank" rel="noopener noreferrer">The Open Graph protocol — ogp.me</a></li>
+        <li><a href="https://developer.x.com/en/docs/x-for-websites/cards/overview/markup" target="_blank" rel="noopener noreferrer">X Developer Platform — Card markup reference</a></li>
+        <li><a href="https://www.w3.org/TR/html52/document-metadata.html" target="_blank" rel="noopener noreferrer">W3C — HTML5.2 document metadata specification</a></li>
+      </ul>
+    </section>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a href="https://multitool.click/">Multi Tool home</a>
+    <a href="https://multitool.click/meta-tag-checker/">Meta Tag Checker</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
