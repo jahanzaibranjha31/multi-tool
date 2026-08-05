@@ -27,33 +27,32 @@ jobs:
           BASE_URL="https://multitool.click"
           TODAY=$(date -u +"%Y-%m-%d")
 
-          {
-            echo '<?xml version="1.0" encoding="UTF-8"?>'
-            echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
+          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
 
-            find . -type f -name "index.html" \
-              ! -path "./.git/*" \
-              ! -path "./.github/*" \
-              ! -path "./node_modules/*" \
-              ! -path "./vendor/*" \
-              ! -path "./dist/*" \
-              ! -path "./build/*" \
-              | sort | while read FILE
-            do
-              DIR=$(dirname "$FILE")
-              DIR="${DIR#./}"
+          find . -type f -name "index.html" \
+            ! -path "./.git/*" \
+            ! -path "./.github/*" \
+            ! -path "./node_modules/*" \
+            ! -path "./vendor/*" \
+            ! -path "./dist/*" \
+            ! -path "./build/*" \
+            | sort | while read FILE
+          do
+            DIR=$(dirname "$FILE")
+            DIR="${DIR#./}"
 
-              if [ "$DIR" = "." ]; then
-                URL="$BASE_URL/"
-                PRIORITY="1.0"
-                CHANGEFREQ="daily"
-              else
-                URL="$BASE_URL/$DIR/"
-                PRIORITY="0.8"
-                CHANGEFREQ="weekly"
-              fi
+            if [ "$DIR" = "." ]; then
+              URL="$BASE_URL/"
+              PRIORITY="1.0"
+              CHANGEFREQ="daily"
+            else
+              URL="$BASE_URL/$DIR/"
+              PRIORITY="0.8"
+              CHANGEFREQ="weekly"
+            fi
 
-              cat <<EOF
+            cat >> sitemap.xml <<EOF
   <url>
     <loc>$URL</loc>
     <lastmod>$TODAY</lastmod>
@@ -61,19 +60,13 @@ jobs:
     <priority>$PRIORITY</priority>
   </url>
 EOF
+          done
 
-            done
+          echo '</urlset>' >> sitemap.xml
 
-            echo '</urlset>'
-          } > sitemap.xml
-
-          awk '!seen[$0]++' sitemap.xml > sitemap.tmp
-          mv sitemap.tmp sitemap.xml
-
-      - name: Validate sitemap
+      - name: Show generated sitemap
         run: |
-          grep "<url>" sitemap.xml
-          grep "</urlset>" sitemap.xml
+          cat sitemap.xml
 
       - name: Commit sitemap
         run: |
@@ -83,8 +76,9 @@ EOF
           git add sitemap.xml
 
           if git diff --cached --quiet; then
-            echo "No sitemap changes."
-          else
-            git commit -m "🤖 Auto-update sitemap.xml"
-            git push
+            echo "No changes."
+            exit 0
           fi
+
+          git commit -m "🤖 Auto-update sitemap.xml"
+          git push
