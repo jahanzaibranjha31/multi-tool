@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free SEO Audit Tool – Instant Website & Keyword Density Checker</title>
+<meta name="description" content="Run a free SEO audit tool in your browser. Check title tags, meta descriptions, headings, image alt text, and google keyword density instantly — no signup, no data stored.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://multitool.click/seo-audit-tool">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="https://multitool.click/seo-audit-tool">
+      <span class="brand-mark" aria-hidden="true">◎</span>
+      <span class="brand-text">SEO Audit Tool</span>
+    </a>
+    <p class="brand-tag">Scan a page. Read the report. Fix what matters.</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Free · Runs in your browser · Nothing uploaded</p>
+      <h1>The SEO Audit Tool that checks your on-page basics <em>and</em> your keyword density — in one scan.</h1>
+      <p class="hero-sub">Paste your page's source code below and this seo audit tool will grade your title tag, meta description, headings, image alt text, links, and google keyword density in seconds. Everything runs locally on this page — nothing is sent to a server.</p>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="audit-form-section wrap">
+    <div class="panel">
+      <h2 class="panel-title"><span class="step-index">01</span> Enter your page details</h2>
+
+      <div class="field">
+        <label for="pageUrl">Website URL <span class="optional">(shown in your report only)</span></label>
+        <input type="url" id="pageUrl" placeholder="https://example.com/your-page">
+      </div>
+
+      <div class="field">
+        <label for="focusKeyword">Focus keyword <span class="optional">(for keyword density calculation)</span></label>
+        <input type="text" id="focusKeyword" placeholder="e.g. seo audit tool">
+      </div>
+
+      <div class="field">
+        <label for="htmlSource">Page HTML source <span class="required">(required)</span></label>
+        <p class="help-text">Open your page → right-click → <strong>View Page Source</strong> → copy everything → paste it here. This is what a real crawler sees, so it's the most accurate way to run a keyword density tool text scan.</p>
+        <textarea id="htmlSource" rows="9" placeholder="&lt;html&gt;&lt;head&gt;&lt;title&gt;...&lt;/title&gt;...&lt;/html&gt;"></textarea>
+      </div>
+
+      <div class="try-fetch-row">
+        <button type="button" id="tryFetchBtn" class="btn btn-ghost">Try auto-fetch from URL instead</button>
+        <span id="fetchStatus" class="fetch-status" role="status"></span>
+      </div>
+
+      <button type="button" id="runAuditBtn" class="btn btn-primary btn-run">Run SEO Audit</button>
+      <p id="formError" class="form-error" role="alert"></p>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="resultsSection" class="results-section wrap hidden">
+    <div class="results-head">
+      <div class="gauge-wrap">
+        <div id="scoreGauge" class="gauge" style="--pct:0;">
+          <div class="gauge-inner">
+            <span id="scoreNumber">0</span>
+            <span class="gauge-label">/ 100</span>
+          </div>
+        </div>
+      </div>
+      <div class="results-summary">
+        <h2>Audit report</h2>
+        <p id="resultsUrlLine" class="results-url"></p>
+        <p id="resultsSummaryText" class="results-summary-text"></p>
+      </div>
+    </div>
+
+    <h3 class="checks-heading">On-page checks</h3>
+    <div id="checksGrid" class="checks-grid"></div>
+
+    <h3 class="checks-heading">Keyword density report</h3>
+    <p class="density-intro">A reliable keyword density tool doesn't just count your main term — it checks how naturally it appears against total word count. Most seo audit tool guidance treats <strong>0.5%–2.5%</strong> as a healthy keyword density calculation range; anything higher can start to look like keyword stuffing.</p>
+    <div class="table-wrap">
+      <table id="densityTable" class="density-table">
+        <thead>
+          <tr><th>Keyword</th><th>Count</th><th>Density</th><th>Status</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- EDUCATIONAL / FAQ CONTENT -->
+  <section class="learn-section wrap">
+    <h2>Keyword density, explained</h2>
+    <p>Search consoles are full of people typing <em>google keyword density</em>, <em>keyword density google</em>, and <em>keyword density for google</em> — but Google has never published an official target number. What this seo audit tool (and most SEO practitioners) actually recommend is using density as a sanity check, not a rule to hit exactly.</p>
+
+    <div class="faq">
+      <div class="faq-item">
+        <h3>What is the keyword density formula?</h3>
+        <p>The standard keyword density formula is: (number of times the keyword appears ÷ total word count) × 100. Run it for your primary term and for close variants, since a real keyword counter tool should track more than one phrase at once.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What counts as the best keyword density?</h3>
+        <p>There's no single best keyword density that works for every page. As a starting range, most seo audit tool checklists suggest keeping any one phrase under roughly 2.5% of total words, then adjusting based on how natural the copy reads out loud.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is there a maximum keyword density I should stay under?</h3>
+        <p>Once a single phrase repeats far more often than a person would naturally write it, search engines can read that as keyword stuffing. Treat 3%+ as a warning line, and use a word density breakdown across your whole page — not just one term — to catch it early.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I use this as a keyword density checker text tool without installing anything?</h3>
+        <p>Yes — this page works fully in your browser. There's no keyword density tool chrome extension or keyword density chrome extension to install; paste your source and the density tool runs instantly, client-side.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES / NON-COMPETING REFERENCE LINKS -->
+  <section class="resources-section wrap">
+    <h2>Helpful, independent SEO resources</h2>
+    <p>This seo audit tool is built for quick checks, not as a replacement for the primary documentation. For deeper reading, these official references are a good next stop:</p>
+    <ul class="resource-list">
+      <li><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank" rel="noopener noreferrer">Google Search Central — SEO Starter Guide</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta" target="_blank" rel="noopener noreferrer">MDN Web Docs — HTML meta element reference</a></li>
+      <li><a href="https://www.w3.org/WAI/tips/writing/" target="_blank" rel="noopener noreferrer">W3C Web Accessibility Initiative — writing tips</a></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Free SEO Audit Tool — <a href="https://multitool.click/seo-audit-tool">multitool.click/seo-audit-tool</a></p>
+    <p class="footer-note">Runs entirely in your browser. Nothing you paste here is uploaded or stored.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
