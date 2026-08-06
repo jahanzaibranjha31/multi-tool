@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
 
-Disallow: /.github/
-Disallow: /scripts/
-
 Sitemap: https://multitool.click/sitemap.xml
